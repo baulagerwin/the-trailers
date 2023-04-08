@@ -1,0 +1,19 @@
+@keyframes sidebarAnimationOpen {
+  0% {
+    left: -20rem;
+  }
+
+  100% {
+    left: 0rem;
+  }
+}
+
+@keyframes sidebarAnimationClose {
+  0% {
+    left: 0rem;
+  }
+
+  100% {
+    left: -20rem;
+  }
+}

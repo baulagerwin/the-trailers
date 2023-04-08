@@ -1,0 +1,15 @@
+@import "./styles/variables";
+@import "./styles/mixins";
+
+@import "./styles/reset";
+@import "./styles/typography";
+@import "./styles/utils";
+@import "./styles/animations";
+
+@import "./components/layout/layout";
+@import "./components/navbar/navbar";
+
+@import "./components/not-found/notFound";
+@import "./components/movies/movies";
+
+@import "./components/common/container/container";

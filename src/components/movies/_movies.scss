@@ -1,0 +1,11 @@
+.movies {
+  &__header {
+    background-image: linear-gradient(transparent, $background-color);
+    height: 75vh;
+  }
+
+  &__body {
+    background-color: $background-color;
+    height: 30rem;
+  }
+}

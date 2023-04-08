@@ -1,0 +1,95 @@
+.navbar {
+  background-color: black;
+  padding: 2rem;
+  max-width: 120rem;
+  margin: 0 auto;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+
+  @include respond(phone-large) {
+    gap: 2rem;
+  }
+
+  &__hamburger {
+    font-size: 4rem;
+    display: none;
+
+    @include respond(phone-large) {
+      display: block;
+    }
+  }
+
+  &__icon {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+  }
+
+  &__text {
+    font-weight: 400;
+    letter-spacing: 0rem;
+    margin-bottom: -1.6rem;
+  }
+
+  &__links {
+    display: flex;
+    gap: 2rem;
+
+    @include respond(phone-large) {
+      position: absolute;
+      top: 8rem;
+      left: 0rem;
+      left: -20rem;
+      background-color: black;
+      flex-direction: column;
+      padding: 2rem;
+      width: 20rem;
+      height: calc(100vh - 8rem);
+    }
+  }
+
+  &__link {
+    font-family: "Oswald", sans-serif;
+    text-transform: uppercase;
+
+    @include respond(phone-large) {
+      font-size: 2rem;
+    }
+  }
+
+  &__search {
+    margin-left: auto;
+    position: relative;
+  }
+
+  &__input {
+    background-color: #333333;
+    opacity: 0.5;
+    border: 1px solid #1a1a1a;
+    color: #b3b3b3;
+    border-radius: 1rem;
+    padding: 1rem;
+    outline: none;
+    color: $text-color;
+
+    &::placeholder {
+      color: #b3b3b3;
+      font-weight: 600;
+    }
+  }
+
+  &__magnifying-glass {
+    position: absolute;
+    top: 50%;
+    left: calc(100% - 2rem);
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+
+    @include respond(phone-large) {
+      font-size: 2.4rem;
+    }
+  }
+}
