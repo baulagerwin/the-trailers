@@ -17,12 +17,18 @@
     background-color: black;
   }
 
+  @include respond(phone-medium) {
+    gap: 1rem;
+    background-color: black;
+  }
+
   &__hamburger {
     font-size: 4rem;
     display: none;
 
     @include respond(phone-large) {
       display: block;
+      flex-shrink: 0;
     }
   }
 
@@ -81,6 +87,7 @@
     padding: 1rem;
     outline: none;
     color: $text-color;
+    width: 100%;
 
     &::placeholder {
       color: #b3b3b3;
