@@ -1,8 +1,5 @@
 .movies-loader {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: linear-gradient(black, $background-color);
+  &__body {
+    background-color: black;
+  }
 }

@@ -1,9 +1,15 @@
-import { FallingLines } from "react-loader-spinner";
+import HeaderLoader from "../../common/header/loader/HeaderLoader";
+import SlideshowLoader from "../../common/slideshow/loader/SlideshowLoader";
 
 function MoviesLoader() {
   return (
     <div className="movies-loader">
-      <FallingLines color="#fff" width={"30rem"} visible={true} />
+      <HeaderLoader />
+      <div className="movies-loader__body">
+        <SlideshowLoader />
+        <SlideshowLoader />
+        <SlideshowLoader />
+      </div>
     </div>
   );
 }

@@ -4,7 +4,6 @@ import IMovie from "../../models/IMovie";
 import useGenres from "./hooks/useGenres";
 import IGenre from "../../models/IGenre";
 import Header from "../common/header/Header";
-import HeaderLoader from "../common/header/loader/HeaderLoader";
 import getRandomNumber from "../../utils/getRandomBetween";
 import { FcFilm, FcFilmReel } from "react-icons/fc";
 import { FiTrendingUp } from "react-icons/fi";
@@ -16,6 +15,7 @@ import useNowPlayingMovies from "./hooks/useNowPlayingMovies";
 import useTrendingMovies from "./hooks/useTrendingMovies";
 import { shuffle } from "lodash";
 import getRandomColor from "../../utils/getRandomColor";
+import MoviesLoader from "./loader/MoviesLoader";
 
 function Movies() {
   const [genresWithColor, setGenresWithColor] = useState<IGenre[]>();
@@ -73,7 +73,7 @@ function Movies() {
     trendingMovies.isLoading ||
     genres.isLoading
   )
-    return <HeaderLoader />;
+    return <MoviesLoader />;
 
   return (
     <div className="movies">

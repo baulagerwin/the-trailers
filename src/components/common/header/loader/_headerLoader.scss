@@ -1,6 +1,5 @@
 .header-loader {
   height: 100vh;
-  width: 100vw;
   background-color: black;
 
   @include respond(laptop-medium) {
@@ -44,14 +43,14 @@
   }
 
   &__movie-data {
-    background-color: rgb(78, 78, 78);
+    background-color: $loading-color;
     width: 14rem;
     height: 2rem;
     border-radius: 0.4rem;
   }
 
   &__movie-title {
-    background-color: rgb(78, 78, 78);
+    background-color: $loading-color;
     width: 40rem;
     height: 4.4rem;
     border-radius: 0.4rem;
@@ -67,7 +66,7 @@
   }
 
   &__movie-genre {
-    background-color: rgb(78, 78, 78);
+    background-color: $loading-color;
     width: 8rem;
     height: 3rem;
     border-radius: 0.4rem;
