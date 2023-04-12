@@ -1,0 +1,120 @@
+.header {
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+
+  @include respond(laptop-medium) {
+    height: 90vh;
+  }
+
+  @include respond(tablet) {
+    height: 80vh;
+  }
+
+  @include respond(phone-large) {
+    height: 60vh;
+  }
+
+  &__movie-details {
+    max-width: 120rem;
+    margin: 0 auto;
+    height: inherit;
+    display: flex;
+    align-items: end;
+
+    @include respond(laptop-medium) {
+      padding: 0rem 2rem;
+    }
+  }
+
+  &__movie-data {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0rem;
+    font-size: 1.6rem;
+
+    @include respond(tablet) {
+      margin-bottom: -0.6rem;
+    }
+
+    @include respond(phone-large) {
+      font-size: 1.4rem;
+    }
+
+    @include respond(phone-medium) {
+      margin-bottom: -1rem;
+    }
+  }
+
+  &__movie-star {
+    font-size: 2rem;
+    display: inline;
+    transform: translateY(-0.15rem);
+    color: yellow;
+
+    @include respond(tablet) {
+      transform: translateY(-0.2rem);
+    }
+
+    @include respond(phone-large) {
+      transform: translateY(-0.3rem);
+    }
+  }
+
+  &__movie-texts {
+    height: 24rem;
+    width: 100%;
+
+    @include respond(laptop-medium) {
+      height: 22rem;
+    }
+
+    @include respond(tablet) {
+      height: 18rem;
+    }
+
+    @include respond(phone-large) {
+      height: 14rem;
+    }
+  }
+
+  &__movie-title {
+    text-transform: uppercase;
+    font-family: "Oswald", sans-serif;
+    font-size: 5rem;
+    letter-spacing: -0.2rem;
+    font-weight: 500;
+    // display: block;
+    line-height: 4.2rem;
+
+    @include respond(tablet) {
+      font-size: 4rem;
+    }
+
+    @include respond(phone-medium) {
+      font-size: 3rem;
+    }
+  }
+
+  &__movie-genres {
+    display: flex;
+    justify-content: stretch;
+    gap: 0.6rem;
+    margin-top: 0.4rem;
+  }
+
+  &__movie-genre {
+    font-weight: 400;
+    background-color: #333333;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.6rem;
+    border: 1px solid $text-color;
+    font-size: 1.4rem;
+
+    @include respond(phone-large) {
+      font-size: 1.2rem;
+      padding: 0.2rem 0.4rem;
+    }
+  }
+}

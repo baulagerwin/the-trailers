@@ -4,17 +4,29 @@ import { FiSearch } from "react-icons/fi";
 import { useEffect, useState } from "react";
 
 function Navbar() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [sidebarStatus, setSidebarStatus] = useState("");
 
   function handleOnCloseSidebar() {
-    setIsSidebarOpen(false);
+    if (sidebarStatus === "open") {
+      setSidebarStatus("close");
+    }
   }
 
   useEffect(() => {
     document.addEventListener("click", handleOnCloseSidebar);
 
     return () => document.removeEventListener("click", handleOnCloseSidebar);
-  }, []);
+  }, [sidebarStatus]);
+
+  useEffect(() => {
+    if (sidebarStatus === "open") {
+      document.body.style.overflow = "hidden";
+
+      return () => {
+        document.body.style.overflow = "visible";
+      };
+    }
+  }, [sidebarStatus]);
 
   return (
     <div className="navbar">
@@ -22,7 +34,9 @@ function Navbar() {
         className="navbar__hamburger"
         onClick={(e) => {
           e.stopPropagation();
-          setIsSidebarOpen(!isSidebarOpen);
+          if (sidebarStatus === "") setSidebarStatus("open");
+          if (sidebarStatus === "close") setSidebarStatus("open");
+          if (sidebarStatus === "open") setSidebarStatus("close");
         }}
       />
       <Link to="/" className="navbar__icon">
@@ -31,10 +45,9 @@ function Navbar() {
       </Link>
       <div
         className={`navbar__links ${
-          isSidebarOpen
-            ? "u__animation--sidebar-open"
-            : "u__animation--sidebar-close"
-        }`}
+          sidebarStatus === "open" && "u__animation--sidebar-open"
+        } ${sidebarStatus === "close" && "u__animation--sidebar-close"}`}
+        onClick={(e) => e.stopPropagation()}
       >
         <Link to="/movies" className="navbar__link">
           Movies

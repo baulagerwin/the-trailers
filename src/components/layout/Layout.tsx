@@ -10,7 +10,7 @@ function Layout({ children }: Props) {
       <div className="layout__navbar">
         <Navbar />
       </div>
-      <div>{children}</div>
+      <div className="layout__page">{children}</div>
     </div>
   );
 }

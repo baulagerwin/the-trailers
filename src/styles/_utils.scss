@@ -1,7 +1,15 @@
 .u__animation--sidebar-open {
-  animation: sidebarAnimationOpen 0.4s linear forwards;
+  @include respond(phone-large) {
+    animation: sidebarAnimationOpen 0.4s linear forwards;
+  }
 }
 
 .u__animation--sidebar-close {
-  animation: sidebarAnimationClose 0.4s linear forwards;
+  @include respond(phone-large) {
+    animation: sidebarAnimationClose 0.4s linear forwards;
+  }
+}
+
+.u__animation--pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }

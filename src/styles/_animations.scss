@@ -1,19 +1,32 @@
 @keyframes sidebarAnimationOpen {
   0% {
-    left: -20rem;
+    opacity: 0;
   }
 
   100% {
-    left: 0rem;
+    transform: translateX(0rem);
+    opacity: 1;
   }
 }
 
 @keyframes sidebarAnimationClose {
   0% {
-    left: 0rem;
+    transform: translateX(0rem);
+    opacity: 1;
   }
 
   100% {
-    left: -20rem;
+    transform: translateX(-20rem);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
   }
 }

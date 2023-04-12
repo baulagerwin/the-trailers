@@ -1,6 +1,5 @@
 .navbar {
-  background-color: black;
-  padding: 2rem;
+  padding: 2rem 0rem;
   max-width: 120rem;
   margin: 0 auto;
   height: 100%;
@@ -9,8 +8,13 @@
   align-items: center;
   gap: 4rem;
 
+  @include respond(laptop-medium) {
+    padding: 2rem;
+  }
+
   @include respond(phone-large) {
     gap: 2rem;
+    background-color: black;
   }
 
   &__hamburger {
@@ -37,12 +41,14 @@
   &__links {
     display: flex;
     gap: 2rem;
+    z-index: 2;
 
     @include respond(phone-large) {
       position: absolute;
       top: 8rem;
+      // left: -20rem;
       left: 0rem;
-      left: -20rem;
+      transform: translateX(-20rem);
       background-color: black;
       flex-direction: column;
       padding: 2rem;
@@ -68,8 +74,9 @@
   &__input {
     background-color: #333333;
     opacity: 0.5;
-    border: 1px solid #1a1a1a;
-    color: #b3b3b3;
+    // border: 1px solid #1a1a1a;
+    border: 1px solid #333333;
+    // color: #b3b3b3;
     border-radius: 1rem;
     padding: 1rem;
     outline: none;
@@ -78,6 +85,11 @@
     &::placeholder {
       color: #b3b3b3;
       font-weight: 600;
+    }
+
+    &:hover,
+    &:focus {
+      border: 1px solid $text-color;
     }
   }
 
