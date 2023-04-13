@@ -1,20 +1,15 @@
-import getMonthDay from "../../../utils/getMonthDay";
-import getGenre from "../../../utils/getGenre";
-import { Link } from "react-router-dom";
 import IMovie from "../../../models/IMovie";
 import IGenre from "../../../models/IGenre";
-import basePosterURL from "../../../tmdb/basePosterURL";
 import { useEffect, useRef, useState } from "react";
 import SlideshowItem from "./SlideshowItem";
 
 interface Props {
   icon: React.ReactNode;
   type: string;
-  movies: IMovie[] | undefined;
-  genres: IGenre[] | undefined;
+  movies: IMovie[];
 }
 
-function Slideshow({ icon, type, movies, genres }: Props) {
+function Slideshow({ icon, type, movies }: Props) {
   const itemRef = useRef<HTMLDivElement>(null);
 
   const [isDown, setIsDown] = useState<boolean>(false);
@@ -124,7 +119,7 @@ function Slideshow({ icon, type, movies, genres }: Props) {
       >
         <ul className="slideshow__items">
           {movies?.map((movie) => (
-            <SlideshowItem key={movie.id} movie={movie} genres={genres} />
+            <SlideshowItem key={movie.id} movie={movie} />
           ))}
         </ul>
       </div>

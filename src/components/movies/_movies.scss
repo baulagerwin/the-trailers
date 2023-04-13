@@ -1,10 +1,59 @@
 .movies {
   &__body {
-    background-color: $background-color;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(5, 22, 30, 1),
+      rgba(5, 22, 30, 1)
+    );
+    padding-bottom: 6rem;
   }
 
   &__footer {
-    height: 20rem;
-    background-color: $background-color;
+    height: 34rem;
+    background-color: rgba(5, 22, 30, 1);
+
+    @include respond(laptop-medium) {
+      height: 30rem;
+    }
+
+    @include respond(tablet) {
+      height: 26rem;
+    }
+  }
+
+  &__content {
+    max-width: 120rem;
+    margin: 0rem auto;
+    height: inherit;
+
+    @include respond(laptop-medium) {
+      padding: 0rem 2rem;
+    }
+  }
+
+  &__powered {
+    a {
+      color: #24bad5;
+    }
+  }
+
+  &__icon {
+    border-top: 1px solid #555;
+
+    padding-top: 6rem;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    width: 100%;
+
+    @include respond(phone-large) {
+      padding-top: 4rem;
+    }
+  }
+
+  &__text {
+    font-weight: 400;
+    letter-spacing: 0rem;
+    margin-bottom: -2rem;
   }
 }

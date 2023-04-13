@@ -1,11 +1,15 @@
 import { useQuery } from "react-query";
 import getFullUrl from "../../../tmdb/getFullUrl";
 import keys from "../../../react-query/keys";
+import GenresDto from "../../../dtos/GenresDto";
+import getRandomColor from "../../../utils/getRandomColor";
+import GenreDto from "../../../dtos/GenreDto";
 import IGenre from "../../../models/IGenre";
+import { genresSelector } from "../../../tmdb/selectors";
 
 const url = "/genre/movie/list";
 
-async function getGenres() {
+async function getGenres(): Promise<GenresDto> {
   const response = await fetch(getFullUrl(url));
   const data = await response.json();
 
@@ -18,7 +22,9 @@ export default function useGenres() {
     data = fallback,
     isLoading,
     isSuccess,
-  } = useQuery(keys.genres, getGenres);
+  } = useQuery(keys.genres, getGenres, {
+    select: genresSelector,
+  });
 
-  return { results: data.genres, isLoading, isSuccess };
+  return { results: data, isLoading, isSuccess };
 }

@@ -1,17 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import basePosterURL from "../../../tmdb/basePosterURL";
 import getMonthDay from "../../../utils/getMonthDay";
-import getGenre from "../../../utils/getGenre";
 import IMovie from "../../../models/IMovie";
-import IGenre from "../../../models/IGenre";
 import { useState } from "react";
 
 interface Props {
   movie: IMovie;
-  genres: IGenre[] | undefined;
 }
 
-function SlideshowItem({ movie, genres }: Props) {
+function SlideshowItem({ movie }: Props) {
   const navigate = useNavigate();
   const [startX, setStartX] = useState(0);
 
@@ -33,11 +30,6 @@ function SlideshowItem({ movie, genres }: Props) {
     navigate(`/`);
   }
 
-  let genre;
-
-  if (!!genres)
-    genre = getGenre(movie?.genre_ids[0] as number, genres) as IGenre;
-
   return (
     <li
       className="slideshow__item"
@@ -56,9 +48,9 @@ function SlideshowItem({ movie, genres }: Props) {
       </div>
       <div className="slideshow__genre">
         <div className="slideshow__cover"></div>
-        <Link to="/" style={{ border: `1px solid ${genre?.borderColor}` }}>
-          {genre?.name}
-        </Link>
+        <span style={{ border: `1px solid ${movie.genres[0]?.borderColor}` }}>
+          {movie.genres[0]?.name}
+        </span>
       </div>
     </li>
   );

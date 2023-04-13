@@ -9,6 +9,7 @@ function MoviesLoader() {
         <SlideshowLoader />
         <SlideshowLoader />
         <SlideshowLoader />
+        <SlideshowLoader />
       </div>
     </div>
   );

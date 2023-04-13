@@ -1,10 +1,9 @@
-import IGenre from "./IGenre";
-
-export default interface IMovie {
+export default interface MovieDto {
   adult: boolean;
   backdrop_path: string;
-  genres: IGenre[];
+  genre_ids: number[];
   id: number;
+  media_type: string;
   original_language: string;
   original_title: string;
   overview: string;

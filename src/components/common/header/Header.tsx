@@ -2,14 +2,12 @@ import { VscStarFull } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import baseBackDropURL from "../../../tmdb/baseBackDropURL";
 import IMovie from "../../../models/IMovie";
-import IGenre from "../../../models/IGenre";
 
 interface Props {
-  movie: IMovie | undefined;
-  genres: IGenre[] | undefined;
+  movie: IMovie;
 }
 
-function Header({ movie, genres }: Props) {
+function Header({ movie }: Props) {
   return (
     <header
       className="header"
@@ -27,7 +25,10 @@ function Header({ movie, genres }: Props) {
         <div className="header__movie-texts">
           <div className="header__movie-data">
             <VscStarFull className="header__movie-star" />
-            <span className="header__movie-rating">{movie?.vote_average}</span>|
+            <span className="header__movie-rating">
+              {movie?.vote_average.toFixed(1)}
+            </span>
+            |
             <span className="header__movie-date">
               {movie?.release_date.replace(/.{6}$/, "")}
             </span>
@@ -36,10 +37,14 @@ function Header({ movie, genres }: Props) {
             {movie?.title}
           </Link>
           <div className="header__movie-genres">
-            {genres?.map((genre) => (
-              <Link key={genre.id} to="/" className="header__movie-genre">
+            {movie?.genres.map((genre) => (
+              <span
+                key={genre.id}
+                className="header__movie-genre"
+                style={{ border: `1px solid ${genre.borderColor}` }}
+              >
                 {genre.name}
-              </Link>
+              </span>
             ))}
           </div>
         </div>
