@@ -63,6 +63,7 @@ function Movies() {
       </div>
       <footer className="movies__footer">
         <div className="movies__content">
+          <hr />
           <Link to="/" className="movies__icon">
             <span className="movies__text">The</span>
             <h3>Trailers</h3>
