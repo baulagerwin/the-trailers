@@ -11,6 +11,7 @@
 @import "./components/common/header/header";
 @import "./components/common/slideshow/slideshow";
 @import "./components/common/footer/footer";
+@import "./components/common/popup/popUp";
 
 @import "./components/not-found/notFound";
 @import "./components/movies/movies";
@@ -20,3 +21,4 @@
 @import "./components/common/header/loader/headerLoader";
 @import "./components/common/slideshow/loader/slideshowLoader";
 @import "./components/tv-shows/loader/tvShowsLoader.scss";
+@import "./components/common/footer/loader/footerLoader";

@@ -13,10 +13,12 @@ import { FcFilm, FcFilmReel } from "react-icons/fc";
 import { GiFilmProjector } from "react-icons/gi";
 import useAnimeTvShows from "./hooks/useAnimeTvShows";
 import TvShowsLoader from "./loader/TvShowsLoader";
+import useToggleWithAnimation from "../common/hooks/useToggleWithAnimation";
+import PopUp from "../common/popup/PopUp";
 
 function TvShows() {
   const isFetching = useIsFetching();
-
+  const { status, handleOnOpen, handleOnClose } = useToggleWithAnimation();
   const genres = useTvShowGenres();
   const trendingTvShows = useTrendingTvShows(genres);
   const headerTvShow = useHeaderTvShow(trendingTvShows);
@@ -37,32 +39,43 @@ function TvShows() {
   if (isFetching) return <TvShowsLoader />;
 
   return (
-    <div className="tv-shows">
-      <Header item={headerTvShow as IHeader} />
-      <div className="tv-shows__body">
-        <Slideshow
-          items={slideshowSelector(trendingTvShows)}
-          icon={<FiTrendingUp className="slideshow__type-icon" />}
-          type="Trending"
-        />
-        <Slideshow
-          items={slideshowSelector(onAirTvShows)}
-          icon={<FcFilm className="slideshow__type-icon" />}
-          type="On air"
-        />
-        <Slideshow
-          items={slideshowSelector(topRatedTvShows)}
-          icon={<GiFilmProjector className="slideshow__type-icon" />}
-          type="Top rated"
-        />
-        <Slideshow
-          items={slideshowSelector(animeTvShows)}
-          icon={<FcFilmReel className="slideshow__type-icon" />}
-          type="Anime"
-        />
+    <>
+      {!!status && (
+        <PopUp status={status} onClose={handleOnClose}>
+          asdf
+        </PopUp>
+      )}
+      <div className="tv-shows">
+        <Header item={headerTvShow as IHeader} onPopUpOpen={handleOnOpen} />
+        <div className="tv-shows__body">
+          <Slideshow
+            items={slideshowSelector(trendingTvShows)}
+            icon={<FiTrendingUp className="slideshow__type-icon" />}
+            type="Trending"
+            onPopUpOpen={handleOnOpen}
+          />
+          <Slideshow
+            items={slideshowSelector(onAirTvShows)}
+            icon={<FcFilm className="slideshow__type-icon" />}
+            type="On air"
+            onPopUpOpen={handleOnOpen}
+          />
+          <Slideshow
+            items={slideshowSelector(animeTvShows)}
+            icon={<FcFilmReel className="slideshow__type-icon" />}
+            type="Anime"
+            onPopUpOpen={handleOnOpen}
+          />
+          <Slideshow
+            items={slideshowSelector(topRatedTvShows)}
+            icon={<GiFilmProjector className="slideshow__type-icon" />}
+            type="Top rated"
+            onPopUpOpen={handleOnOpen}
+          />
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   );
 }
 

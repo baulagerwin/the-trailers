@@ -5,9 +5,10 @@ interface Props {
   icon: React.ReactNode;
   type: string;
   items: ISlideshowItem[];
+  onPopUpOpen: (e: React.MouseEvent) => void;
 }
 
-function Slideshow({ icon, type, items }: Props) {
+function Slideshow({ icon, type, items, onPopUpOpen }: Props) {
   const itemRef = useRef<HTMLDivElement>(null);
 
   const [isDown, setIsDown] = useState<boolean>(false);
@@ -117,7 +118,11 @@ function Slideshow({ icon, type, items }: Props) {
       >
         <ul className="slideshow__items">
           {items?.map((item) => (
-            <SlideshowItem key={item.id} item={item} />
+            <SlideshowItem
+              key={item.id}
+              item={item}
+              onPopUpOpen={onPopUpOpen}
+            />
           ))}
         </ul>
       </div>

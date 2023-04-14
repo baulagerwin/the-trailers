@@ -13,9 +13,10 @@ export interface IHeader {
 
 interface Props {
   item: IHeader;
+  onPopUpOpen: (e: React.MouseEvent) => void;
 }
 
-function Header({ item }: Props) {
+function Header({ item, onPopUpOpen }: Props) {
   return (
     <header
       className="header"
@@ -50,6 +51,7 @@ function Header({ item }: Props) {
                 key={genre.id}
                 className="header__movie-genre"
                 style={{ border: `1px solid ${genre.borderColor}` }}
+                onClick={onPopUpOpen}
               >
                 {genre.name}
               </span>

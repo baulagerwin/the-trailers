@@ -3,7 +3,7 @@ const keys = {
   trendingMovies: "trendingMovies",
   nowPlayingMovies: "nowPlayingMovies",
   topRatedMovies: "topRatedMovies",
-  upcomingMovies: "upcomingMovies",
+  animeMovies: "animeMovies",
   tvShowGenres: "tvShowGenres",
   trendingTvShows: "trendingTvShows",
   onAirTvShows: "onAirTvShows",

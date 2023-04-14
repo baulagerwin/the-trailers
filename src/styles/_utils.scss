@@ -13,3 +13,19 @@
 .u__animation--pulse {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
+
+.u__animation--popup-content-open {
+  animation: popUpContentAnimationOpen 0.4s ease forwards;
+}
+
+.u__animation--popup-content-close {
+  animation: popUpContentAnimationClose 0.4s ease forwards;
+}
+
+.u__animation--popup-open {
+  animation: popUpAnimationOpen 0.4s ease forwards;
+}
+
+.u__animation--popup-close {
+  animation: popUpAnimationClose 0.4s ease forwards;
+}

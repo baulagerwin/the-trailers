@@ -14,9 +14,10 @@ export interface ISlideshowItem {
 
 interface Props {
   item: ISlideshowItem;
+  onPopUpOpen: (e: React.MouseEvent) => void;
 }
 
-function SlideshowItem({ item }: Props) {
+function SlideshowItem({ item, onPopUpOpen }: Props) {
   const navigate = useNavigate();
   const [startX, setStartX] = useState(0);
 
@@ -55,7 +56,11 @@ function SlideshowItem({ item }: Props) {
         {getMonthDay(item?.releaseDate as string)}
       </div>
       <div className="slideshow__genre">
-        <div className="slideshow__cover"></div>
+        <div
+          className="slideshow__cover"
+          onMouseUp={(e) => e.stopPropagation()}
+          onClick={onPopUpOpen}
+        ></div>
         <span
           style={{
             border: `1px solid ${

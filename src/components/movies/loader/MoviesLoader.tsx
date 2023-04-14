@@ -1,3 +1,4 @@
+import FooterLoader from "../../common/footer/loader/FooterLoader";
 import HeaderLoader from "../../common/header/loader/HeaderLoader";
 import SlideshowLoader from "../../common/slideshow/loader/SlideshowLoader";
 
@@ -11,6 +12,7 @@ function MoviesLoader() {
         <SlideshowLoader />
         <SlideshowLoader />
       </div>
+      <FooterLoader />
     </div>
   );
 }

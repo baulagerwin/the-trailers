@@ -1,7 +1,15 @@
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import MoviesLoader from "../components/movies/loader/MoviesLoader";
 
 function Index() {
-  return <Navigate to="/movies" />;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate("/movies");
+  }, []);
+
+  return <MoviesLoader />;
 }
 
 export default Index;
