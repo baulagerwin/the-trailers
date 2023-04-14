@@ -49,10 +49,10 @@ function Navbar() {
         } ${sidebarStatus === "close" && "u__animation--sidebar-close"}`}
         onClick={(e) => e.stopPropagation()}
       >
-        <Link to="/movies" className="navbar__link">
+        <Link to="/movies" className="navbar__link" onClick={() => setSidebarStatus("close")}>
           Movies
         </Link>
-        <Link to="/tv-shows" className="navbar__link">
+        <Link to="/tv-shows" className="navbar__link" onClick={() => setSidebarStatus("close")}>
           TV Shows
         </Link>
       </div>

@@ -12,6 +12,7 @@ import useTopRatedTvShows from "./hooks/useTopRatedTvShows";
 import { FcFilm, FcFilmReel } from "react-icons/fc";
 import { GiFilmProjector } from "react-icons/gi";
 import useAnimeTvShows from "./hooks/useAnimeTvShows";
+import TvShowsLoader from "./loader/TvShowsLoader";
 
 function TvShows() {
   const isFetching = useIsFetching();
@@ -33,7 +34,7 @@ function TvShows() {
     }));
   };
 
-  if (isFetching) return <div>Loading...</div>;
+  if (isFetching) return <TvShowsLoader />;
 
   return (
     <div className="tv-shows">
