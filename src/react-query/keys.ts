@@ -1,9 +1,14 @@
 const keys = {
-  upcomingMovies: "upcomingMovies",
-  popularMovies: "popularMovies",
+  movieGenres: "movieGenres",
+  trendingMovies: "trendingMovies",
   nowPlayingMovies: "nowPlayingMovies",
   topRatedMovies: "topRatedMovies",
-  genres: "genres",
+  upcomingMovies: "upcomingMovies",
+  tvShowGenres: "tvShowGenres",
+  trendingTvShows: "trendingTvShows",
+  onAirTvShows: "onAirTvShows",
+  topRatedTvShows: "topRatedTvShows",
+  animeTvShows: "animeTvShows",
 };
 
 export default keys;

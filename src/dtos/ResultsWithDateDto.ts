@@ -1,12 +1,10 @@
-import MovieDto from "./MovieDto";
-
-export default interface MoviesWithDateDto {
+export default interface ResultsWithDateDto<T> {
   dates: {
     maximum: string;
     minimum: string;
   };
   page: number;
-  results: MovieDto[];
+  results: T[];
   total_pages: number;
   total_results: number;
 }

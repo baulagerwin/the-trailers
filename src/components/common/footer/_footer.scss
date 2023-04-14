@@ -1,0 +1,47 @@
+.footer {
+  height: 34rem;
+  background-color: rgba(5, 22, 30, 1);
+
+  @include respond(laptop-medium) {
+    height: 30rem;
+  }
+
+  @include respond(tablet) {
+    height: 26rem;
+  }
+
+  &__content {
+    max-width: 120rem;
+    margin: 0rem auto;
+    height: inherit;
+
+    @include respond(laptop-medium) {
+      padding: 0rem 2rem;
+    }
+  }
+
+  &__powered {
+    font-size: 1.8rem;
+
+    a {
+      color: #24bad5;
+    }
+  }
+
+  &__icon {
+    padding-top: 6rem;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+
+    @include respond(phone-large) {
+      padding-top: 4rem;
+    }
+  }
+
+  &__text {
+    font-weight: 400;
+    letter-spacing: 0rem;
+    margin-bottom: -2rem;
+  }
+}

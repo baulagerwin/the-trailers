@@ -1,9 +1,5 @@
-import { useEffect, useState } from "react";
 import useUpcomingMovies from "./hooks/useUpcomingMovies";
-import IMovie from "../../models/IMovie";
-import useGenres from "./hooks/useGenres";
-import Header from "../common/header/Header";
-import getRandomNumber from "../../utils/getRandomBetween";
+import Header, { IHeader } from "../common/header/Header";
 import { FcFilm, FcFilmReel } from "react-icons/fc";
 import { FiTrendingUp } from "react-icons/fi";
 import { GiFilmProjector } from "react-icons/gi";
@@ -14,70 +10,59 @@ import useTrendingMovies from "./hooks/useTrendingMovies";
 import { shuffle } from "lodash";
 import MoviesLoader from "./loader/MoviesLoader";
 import { useIsFetching } from "react-query";
-import { Link } from "react-router-dom";
+import Footer from "../common/footer/Footer";
+import useMovieGenres from "./hooks/useMovieGenres";
+import useHeaderMovie from "./hooks/useHeaderMovie";
+import IMovie from "../../models/IMovie";
 
 function Movies() {
-  const [trendingMovie, setTrendingMovie] = useState<IMovie>();
   const isFetching = useIsFetching();
 
-  const genres = useGenres();
-  const trendingMovies = useTrendingMovies(genres.results);
-  const nowPlayingMovies = useNowPlayingMovies(genres.results);
-  const topRatedMovies = useTopRatedMovies(genres.results);
-  const upcomingMovies = useUpcomingMovies(genres.results);
+  const genres = useMovieGenres();
+  const trendingMovies = useTrendingMovies(genres);
+  const headerMovie = useHeaderMovie(trendingMovies);
+  const nowPlayingMovies = useNowPlayingMovies(genres);
+  const topRatedMovies = useTopRatedMovies(genres);
+  const upcomingMovies = useUpcomingMovies(genres);
 
-  useEffect(() => {
-    if (trendingMovies.isSuccess) {
-      const index = getRandomNumber(0, 19);
-      const randomTrendingMovie = trendingMovies.results[index] as IMovie;
-      setTrendingMovie(randomTrendingMovie);
-    }
-  }, [trendingMovies.results]);
+  const slideshowSelector = (movies: IMovie[]) => {
+    return movies.map((movie) => ({
+      id: movie.id,
+      imageUrl: movie.poster_path,
+      title: movie.title,
+      releaseDate: movie.release_date,
+      genres: movie.genres,
+    }));
+  };
 
   if (isFetching) return <MoviesLoader />;
 
   return (
     <div className="movies">
-      <Header movie={trendingMovie as IMovie} />
+      <Header item={headerMovie as IHeader} />
       <div className="movies__body">
         <Slideshow
-          movies={trendingMovies.results}
+          items={slideshowSelector(trendingMovies)}
           icon={<FiTrendingUp className="slideshow__type-icon" />}
           type="Trending"
         />
         <Slideshow
-          movies={shuffle(nowPlayingMovies.results)}
+          items={slideshowSelector(shuffle(nowPlayingMovies))}
           icon={<FcFilm className="slideshow__type-icon" />}
           type="Now showing"
         />
         <Slideshow
-          movies={topRatedMovies.results}
+          items={slideshowSelector(topRatedMovies)}
           icon={<GiFilmProjector className="slideshow__type-icon" />}
           type="Highly rated"
         />
         <Slideshow
-          movies={upcomingMovies.results}
+          items={slideshowSelector(upcomingMovies)}
           icon={<FcFilmReel className="slideshow__type-icon" />}
           type="What's new"
         />
       </div>
-      <footer className="movies__footer">
-        <div className="movies__content">
-          <hr />
-          <Link to="/" className="movies__icon">
-            <span className="movies__text">The</span>
-            <h3>Trailers</h3>
-          </Link>
-          <p className="movies__powered">
-            Powered by{" "}
-            <a href="https://twitter.com/themoviedb?lang=en" target="_blank">
-              @themoviedb
-            </a>
-          </p>
-          <p className="movies__creator">Crafted by Gerwin Baula</p>
-          <p className="movies__copyright">All rights reserved. &copy; 2023</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

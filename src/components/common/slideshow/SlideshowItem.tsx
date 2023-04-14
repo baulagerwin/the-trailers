@@ -1,14 +1,22 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import basePosterURL from "../../../tmdb/basePosterURL";
 import getMonthDay from "../../../utils/getMonthDay";
-import IMovie from "../../../models/IMovie";
 import { useState } from "react";
+import IGenre from "../../../models/IGenre";
 
-interface Props {
-  movie: IMovie;
+export interface ISlideshowItem {
+  id: number;
+  imageUrl: string;
+  title: string;
+  releaseDate: string;
+  genres: IGenre[];
 }
 
-function SlideshowItem({ movie }: Props) {
+interface Props {
+  item: ISlideshowItem;
+}
+
+function SlideshowItem({ item }: Props) {
   const navigate = useNavigate();
   const [startX, setStartX] = useState(0);
 
@@ -40,16 +48,22 @@ function SlideshowItem({ movie }: Props) {
     >
       <div className="slideshow__image">
         <div className="slideshow__cover"></div>
-        <img src={movie && basePosterURL + movie.poster_path} alt="Poster" />
+        <img src={basePosterURL + item.imageUrl} alt="Poster" />
       </div>
-      <div className="slideshow__title">{movie?.title}</div>
+      <div className="slideshow__title">{item?.title}</div>
       <div className="slideshow__release-date">
-        {getMonthDay(movie?.release_date as string)}
+        {getMonthDay(item?.releaseDate as string)}
       </div>
       <div className="slideshow__genre">
         <div className="slideshow__cover"></div>
-        <span style={{ border: `1px solid ${movie.genres[0]?.borderColor}` }}>
-          {movie.genres[0]?.name}
+        <span
+          style={{
+            border: `1px solid ${
+              item.genres[item.genres.length - 1]?.borderColor
+            }`,
+          }}
+        >
+          {item.genres[item.genres.length - 1]?.name}
         </span>
       </div>
     </li>

@@ -1,14 +1,15 @@
 import { useQuery } from "react-query";
 import getFullUrl from "../../../tmdb/getFullUrl";
 import keys from "../../../react-query/keys";
-import MoviesWithoutDateDto from "../../../dtos/MoviesWithoutDateDto";
 import IMovie from "../../../models/IMovie";
-import { moviesSelector } from "../../../tmdb/selectors";
+import { moviesSelector } from "../../../react-query/selectors";
 import IGenre from "../../../models/IGenre";
+import ResultsWithoutDateDto from "../../../dtos/ResultsWithoutDateDto";
+import MovieDto from "../../../dtos/MovieDto";
 
 const url = "/movie/now_playing";
 
-async function getNowPlayingMovies(): Promise<MoviesWithoutDateDto> {
+async function getNowPlayingMovies(): Promise<ResultsWithoutDateDto<MovieDto>> {
   const response = await fetch(getFullUrl(url));
   const data = await response.json();
 
@@ -17,13 +18,13 @@ async function getNowPlayingMovies(): Promise<MoviesWithoutDateDto> {
 
 export default function useNowPlayingMovies(genres: IGenre[]) {
   const fallback: IMovie[] = [];
-  const {
-    data = fallback,
-    isLoading,
-    isSuccess,
-  } = useQuery(keys.nowPlayingMovies, getNowPlayingMovies, {
-    select: (data) => moviesSelector(data, genres),
-  });
+  const { data = fallback } = useQuery(
+    keys.nowPlayingMovies,
+    getNowPlayingMovies,
+    {
+      select: (data) => moviesSelector(data, genres),
+    }
+  );
 
-  return { results: data, isLoading, isSuccess };
+  return data;
 }

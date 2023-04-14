@@ -1,15 +1,13 @@
-import IMovie from "../../../models/IMovie";
-import IGenre from "../../../models/IGenre";
 import { useEffect, useRef, useState } from "react";
-import SlideshowItem from "./SlideshowItem";
+import SlideshowItem, { ISlideshowItem } from "./SlideshowItem";
 
 interface Props {
   icon: React.ReactNode;
   type: string;
-  movies: IMovie[];
+  items: ISlideshowItem[];
 }
 
-function Slideshow({ icon, type, movies }: Props) {
+function Slideshow({ icon, type, items }: Props) {
   const itemRef = useRef<HTMLDivElement>(null);
 
   const [isDown, setIsDown] = useState<boolean>(false);
@@ -118,8 +116,8 @@ function Slideshow({ icon, type, movies }: Props) {
         onTouchEnd={handleOnTouchEnd}
       >
         <ul className="slideshow__items">
-          {movies?.map((movie) => (
-            <SlideshowItem key={movie.id} movie={movie} />
+          {items?.map((item) => (
+            <SlideshowItem key={item.id} item={item} />
           ))}
         </ul>
       </div>
