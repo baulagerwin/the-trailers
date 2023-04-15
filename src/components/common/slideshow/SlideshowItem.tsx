@@ -50,38 +50,42 @@ function SlideshowItem({ of, item, onPopUpOpen }: Props) {
       onTouchStart={handleOnTouchStart}
       onTouchEnd={handleOnTouchEnd}
     >
-      <div className="slideshow__image">
-        <div className="slideshow__cover"></div>
-        <img src={basePosterURL + item.imageUrl} alt="Poster" />
-      </div>
-      <div className="slideshow__title">{item?.title}</div>
-      <div className="slideshow__release-date">
-        {getMonthDay(item?.releaseDate as string)}
-      </div>
-      <div className="slideshow__genre">
-        <div
-          className="slideshow__cover"
-          onMouseUp={(e) => e.stopPropagation()}
-          onClick={(e) =>
-            onPopUpOpen(e, {
-              name: item.genres[item.genres.length - 1]?.name,
-              url: getFullUrl(
-                `/discover/${of}`,
-                `&with_genres=${item.genres[item.genres.length - 1]?.id}`
-              ),
-            })
-          }
-        ></div>
-        <span
-          style={{
-            border: `1px solid ${
-              item.genres[item.genres.length - 1]?.borderColor
-            }`,
-          }}
-        >
-          {item.genres[item.genres.length - 1]?.name}
-        </span>
-      </div>
+      {!!item && (
+        <>
+          <div className="slideshow__image">
+            <div className="slideshow__cover"></div>
+            <img src={basePosterURL + item.imageUrl} alt="Poster" />
+          </div>
+          <div className="slideshow__title">{item?.title}</div>
+          <div className="slideshow__release-date">
+            {getMonthDay(item?.releaseDate as string)}
+          </div>
+          <div className="slideshow__genre">
+            <div
+              className="slideshow__cover"
+              onMouseUp={(e) => e.stopPropagation()}
+              onClick={(e) =>
+                onPopUpOpen(e, {
+                  name: item.genres[item.genres.length - 1]?.name,
+                  url: getFullUrl(
+                    `/discover/${of}`,
+                    `&with_genres=${item.genres[item.genres.length - 1]?.id}`
+                  ),
+                })
+              }
+            ></div>
+            <span
+              style={{
+                border: `1px solid ${
+                  item.genres[item.genres.length - 1]?.borderColor
+                }`,
+              }}
+            >
+              {item.genres[item.genres.length - 1]?.name}
+            </span>
+          </div>
+        </>
+      )}
     </li>
   );
 }

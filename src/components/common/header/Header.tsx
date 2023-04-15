@@ -32,9 +32,9 @@ function Header({ item, onPopUpOpen }: Props) {
           ), url(${item && baseBackDropURL + item.backgroundImageUrl})`,
       }}
     >
-      <div className="header__movie-details">
-        <div className="header__movie-texts">
-          {item && (
+      {!!item && (
+        <div className="header__movie-details">
+          <div className="header__movie-texts">
             <div className="header__movie-data">
               <VscStarFull className="header__movie-star" />
               <span className="header__movie-rating">
@@ -45,32 +45,32 @@ function Header({ item, onPopUpOpen }: Props) {
                 {item?.releaseDate.replace(/.{6}$/, "")}
               </span>
             </div>
-          )}
-          <Link to="/" className="header__movie-title">
-            {item?.title}
-          </Link>
-          <div className="header__movie-genres">
-            {item?.genres.map((genre) => (
-              <span
-                key={genre.id}
-                className="header__movie-genre"
-                style={{ border: `1px solid ${genre.borderColor}` }}
-                onClick={(e) =>
-                  onPopUpOpen(e, {
-                    name: genre.name,
-                    url: getFullUrl(
-                      "/discover/movie",
-                      `&with_genres=${genre.id}`
-                    ),
-                  })
-                }
-              >
-                {genre.name}
-              </span>
-            ))}
+            <Link to="/" className="header__movie-title">
+              {item?.title}
+            </Link>
+            <div className="header__movie-genres">
+              {item?.genres.map((genre) => (
+                <span
+                  key={genre.id}
+                  className="header__movie-genre"
+                  style={{ border: `1px solid ${genre.borderColor}` }}
+                  onClick={(e) =>
+                    onPopUpOpen(e, {
+                      name: genre.name,
+                      url: getFullUrl(
+                        "/discover/movie",
+                        `&with_genres=${genre.id}`
+                      ),
+                    })
+                  }
+                >
+                  {genre.name}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </header>
   );
 }
