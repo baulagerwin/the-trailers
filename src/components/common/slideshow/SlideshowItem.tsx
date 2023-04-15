@@ -27,16 +27,16 @@ function SlideshowItem({ item, onPopUpOpen }: Props) {
 
   function handleOnMouseUp(e: React.MouseEvent) {
     if (startX !== e.nativeEvent.pageX) return;
-    navigate(`/`);
+    navigate(`/movies`);
   }
 
   function handleOnTouchStart(e: React.TouchEvent) {
     setStartX(e.touches[0]?.clientX);
-  }
+  } 
 
   function handleOnTouchEnd(e: React.TouchEvent) {
     if (startX !== e.touches[0]?.clientX) return;
-    navigate(`/`);
+    navigate(`/movies`);
   }
 
   return (

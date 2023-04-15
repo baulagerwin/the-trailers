@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import SlideshowItem, { ISlideshowItem } from "./SlideshowItem";
+import { IoIosArrowRoundForward } from "react-icons/io";
 
 interface Props {
   icon: React.ReactNode;
@@ -101,8 +102,18 @@ function Slideshow({ icon, type, items, onPopUpOpen }: Props) {
     <div className="slideshow">
       <div className="slideshow__header">
         <div className="slideshow__type">
-          {icon}
-          <span className="slideshow__type-text">{type}</span>
+          <span className="slideshow__type-text">
+            {icon}
+            {type}
+          </span>
+          <button
+            type="button"
+            className="slideshow__type-more"
+            onClick={onPopUpOpen}
+          >
+            <span>See more</span>
+            {/* <IoIosArrowRoundForward className="slideshow__type-arrow" /> */}
+          </button>
         </div>
       </div>
       <div

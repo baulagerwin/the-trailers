@@ -1,0 +1,29 @@
+.movies-popup {
+  padding: 1rem;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0rem 0rem 1rem 0rem;
+  }
+
+  &__back {
+    font-size: 2.8rem;
+    cursor: pointer;
+
+    @include respond(phone-large) {
+      font-size: 3rem;
+    }
+  }
+
+  &__close {
+    font-size: 2.8rem;
+    color: $text-color;
+    cursor: pointer;
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+  }
+}

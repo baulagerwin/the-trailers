@@ -26,19 +26,39 @@
 
   &__type {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     height: fit-content;
     gap: 0.6rem;
     font-size: 1.8rem;
     font-weight: 500;
+    width: 100%;
 
     @include respond(tablet) {
       font-size: 2rem;
     }
   }
 
-  &__type-icon {
-    transform: translateY(-0.2rem);
+  &__type-text {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__type-more {
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    background-color: transparent;
+    border: transparent;
+    color: $text-color;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  &__type-arrow {
+    font-size: 2.2rem;
   }
 
   &__window {

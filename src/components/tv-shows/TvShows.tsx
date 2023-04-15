@@ -15,6 +15,7 @@ import useAnimeTvShows from "./hooks/useAnimeTvShows";
 import TvShowsLoader from "./loader/TvShowsLoader";
 import useToggleWithAnimation from "../common/hooks/useToggleWithAnimation";
 import PopUp from "../common/popup/PopUp";
+import MoviesPopUpContent from "../movies/popup/MoviesPopUpContent";
 
 function TvShows() {
   const isFetching = useIsFetching();
@@ -42,7 +43,7 @@ function TvShows() {
     <>
       {!!status && (
         <PopUp status={status} onClose={handleOnClose}>
-          asdf
+          <MoviesPopUpContent onClose={handleOnClose} />
         </PopUp>
       )}
       <div className="tv-shows">

@@ -56,17 +56,21 @@
 @keyframes popUpAnimationOpen {
   0% {
     visibility: hidden;
+    opacity: 0;
   }
   100% {
     visibility: visible;
+    opacity: 1;
   }
 }
 
 @keyframes popUpAnimationClose {
   0% {
     visibility: visible;
+    opacity: 1;
   }
   100% {
     visibility: hidden;
+    opacity: 0;
   }
 }
