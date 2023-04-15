@@ -37,6 +37,21 @@ function Movies() {
     }));
   };
 
+  // data = {
+  //   name: "Trending"
+  //   url: "assd/f/sd/sdf/genreId",
+  // }
+
+  // openPopUp(e, data) {
+  //  setState to data
+  //  handleOpen(e)
+  // }
+
+  // closePopUp() {
+  //  clear data
+  //  handleClose()
+  // }
+
   if (isFetching) return <MoviesLoader />;
 
   return (

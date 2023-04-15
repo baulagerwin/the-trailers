@@ -32,7 +32,7 @@ function Header({ item, onPopUpOpen }: Props) {
     >
       <div className="header__movie-details">
         <div className="header__movie-texts">
-          <div className="header__movie-data">
+          {item && <div className="header__movie-data">
             <VscStarFull className="header__movie-star" />
             <span className="header__movie-rating">
               {item?.score.toFixed(1)}
@@ -41,7 +41,7 @@ function Header({ item, onPopUpOpen }: Props) {
             <span className="header__movie-date">
               {item?.releaseDate.replace(/.{6}$/, "")}
             </span>
-          </div>
+          </div>}
           <Link to="/" className="header__movie-title">
             {item?.title}
           </Link>
