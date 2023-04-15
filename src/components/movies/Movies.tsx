@@ -13,13 +13,15 @@ import Footer from "../common/footer/Footer";
 import useMovieGenres from "./hooks/useMovieGenres";
 import useHeaderMovie from "./hooks/useHeaderMovie";
 import IMovie from "../../models/IMovie";
-import PopUp from "../common/popup/PopUp";
 import useToggleWithAnimation from "../common/hooks/useToggleWithAnimation";
-import MoviesPopUpContent from "./popup/MoviesPopUpContent";
+import MoviesPopUp, { IMoviesPopUp } from "./popup/MoviesPopUp";
+import { useState } from "react";
+import getFullUrl from "../../tmdb/getFullUrl";
 
 function Movies() {
   const isFetching = useIsFetching();
   const { status, handleOnOpen, handleOnClose } = useToggleWithAnimation();
+  const [popUpData, setPopUpData] = useState<IMoviesPopUp>();
   const genres = useMovieGenres();
   const trendingMovies = useTrendingMovies(genres);
   const headerMovie = useHeaderMovie(trendingMovies);
@@ -37,56 +39,63 @@ function Movies() {
     }));
   };
 
-  // data = {
-  //   name: "Trending"
-  //   url: "assd/f/sd/sdf/genreId",
-  // }
+  function openPopUp(e: React.MouseEvent, data: IMoviesPopUp) {
+    setPopUpData(data);
+    handleOnOpen(e);
+  }
 
-  // openPopUp(e, data) {
-  //  setState to data
-  //  handleOpen(e)
-  // }
-
-  // closePopUp() {
-  //  clear data
-  //  handleClose()
-  // }
+  function closePopUp() {
+    handleOnClose();
+  }
 
   if (isFetching) return <MoviesLoader />;
 
   return (
     <>
       {!!status && (
-        <PopUp status={status} onClose={handleOnClose}>
-          <MoviesPopUpContent onClose={handleOnClose} />
-        </PopUp>
+        <MoviesPopUp
+          data={popUpData as IMoviesPopUp}
+          status={status}
+          onClose={closePopUp}
+        />
       )}
       <div className="movies">
-        <Header item={headerMovie as IHeader} onPopUpOpen={handleOnOpen} />
+        <Header item={headerMovie as IHeader} onPopUpOpen={openPopUp} />
         <div className="movies__body">
           <Slideshow
+            of="movie"
             items={slideshowSelector(trendingMovies)}
             icon={<FiTrendingUp className="slideshow__type-icon" />}
             type="Trending"
-            onPopUpOpen={handleOnOpen}
+            onPopUpOpen={openPopUp}
+            url={getFullUrl("/trending/movie/week")}
           />
           <Slideshow
+            of="movie"
             items={slideshowSelector(nowPlayingMovies)}
             icon={<FcFilm className="slideshow__type-icon" />}
-            type="Now showing"
-            onPopUpOpen={handleOnOpen}
+            type="Now Showing"
+            onPopUpOpen={openPopUp}
+            url={getFullUrl("/movie/now_playing")}
           />
           <Slideshow
+            of="movie"
             items={slideshowSelector(animeMovies)}
             icon={<FcFilmReel className="slideshow__type-icon" />}
             type="Anime"
-            onPopUpOpen={handleOnOpen}
+            onPopUpOpen={openPopUp}
+            url={getFullUrl(
+              "/movie/top_rated",
+              "&with_genres=16&with_original_language=ja&with_movie=true"
+            )}
           />
           <Slideshow
+            of="movie"
             items={slideshowSelector(topRatedMovies)}
             icon={<GiFilmProjector className="slideshow__type-icon" />}
-            type="Highly rated"
-            onPopUpOpen={handleOnOpen}
+            type="Highly Rated"
+            onPopUpOpen={openPopUp}
+            url={getFullUrl("/movie/top_rated")}
           />
         </div>
         <Footer />

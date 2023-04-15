@@ -1,28 +1,31 @@
 import PopUp from "../../common/popup/PopUp";
 import { BsArrowRight } from "react-icons/bs";
 
-export interface IMoviesPopUp {
+export interface ITvShowsPopUp {
   name: string;
   url: string;
 }
 
 interface Props {
-  data: IMoviesPopUp;
+  data: ITvShowsPopUp;
   status: string;
   onClose: () => void;
 }
 
-function MoviesPopUp({ data, status, onClose }: Props) {
+function TvShowsPopUp({ data, status, onClose }: Props) {
   console.log(data);
 
   return (
     <PopUp status={status} onClose={onClose}>
-      <div className="movies-popup">
-        <header className="movies-popup__header">
+      <div className="tv-shows-popup">
+        <header className="tv-shows-popup__header">
           <h2>{data.name}</h2>
-          <BsArrowRight className="movies-popup__back-icon" onClick={onClose} />
+          <BsArrowRight
+            className="tv-shows-popup__back-icon"
+            onClick={onClose}
+          />
         </header>
-        <div className="movies-popup__body">
+        <div className="tv-shows-popup__body">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi nobis
           velit quae impedit odit. Ad, accusamus iure? Reprehenderit rem a est
           aperiam et quae consectetur laborum, asperiores officiis veritatis
@@ -85,4 +88,4 @@ function MoviesPopUp({ data, status, onClose }: Props) {
   );
 }
 
-export default MoviesPopUp;
+export default TvShowsPopUp;

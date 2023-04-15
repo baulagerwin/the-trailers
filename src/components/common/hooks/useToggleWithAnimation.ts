@@ -11,6 +11,7 @@ function useToggleWithAnimation() {
 
   function handleOnOpen(e: React.MouseEvent) {
     e.stopPropagation();
+
     if (status === "") setStatus("open");
     if (status === "close") setStatus("open");
     if (status === "open") setStatus("close");

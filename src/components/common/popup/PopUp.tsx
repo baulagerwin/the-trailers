@@ -15,7 +15,7 @@ function PopUp({ children, status, onClose }: Props) {
         document.body.style.overflow = "visible";
       };
     }
-  }, []);
+  }, [status]);
 
   return (
     <div

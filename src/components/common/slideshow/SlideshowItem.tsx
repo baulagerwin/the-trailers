@@ -3,6 +3,8 @@ import basePosterURL from "../../../tmdb/basePosterURL";
 import getMonthDay from "../../../utils/getMonthDay";
 import { useState } from "react";
 import IGenre from "../../../models/IGenre";
+import { IMoviesPopUp } from "../../movies/popup/MoviesPopUp";
+import getFullUrl from "../../../tmdb/getFullUrl";
 
 export interface ISlideshowItem {
   id: number;
@@ -13,11 +15,12 @@ export interface ISlideshowItem {
 }
 
 interface Props {
+  of: string;
   item: ISlideshowItem;
-  onPopUpOpen: (e: React.MouseEvent) => void;
+  onPopUpOpen: (e: React.MouseEvent, data: IMoviesPopUp) => void;
 }
 
-function SlideshowItem({ item, onPopUpOpen }: Props) {
+function SlideshowItem({ of, item, onPopUpOpen }: Props) {
   const navigate = useNavigate();
   const [startX, setStartX] = useState(0);
 
@@ -32,7 +35,7 @@ function SlideshowItem({ item, onPopUpOpen }: Props) {
 
   function handleOnTouchStart(e: React.TouchEvent) {
     setStartX(e.touches[0]?.clientX);
-  } 
+  }
 
   function handleOnTouchEnd(e: React.TouchEvent) {
     if (startX !== e.touches[0]?.clientX) return;
@@ -59,7 +62,15 @@ function SlideshowItem({ item, onPopUpOpen }: Props) {
         <div
           className="slideshow__cover"
           onMouseUp={(e) => e.stopPropagation()}
-          onClick={onPopUpOpen}
+          onClick={(e) =>
+            onPopUpOpen(e, {
+              name: item.genres[item.genres.length - 1]?.name,
+              url: getFullUrl(
+                `/discover/${of}`,
+                `&with_genres=${item.genres[item.genres.length - 1]?.id}`
+              ),
+            })
+          }
         ></div>
         <span
           style={{

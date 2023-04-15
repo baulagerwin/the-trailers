@@ -2,6 +2,8 @@ import { VscStarFull } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import baseBackDropURL from "../../../tmdb/baseBackDropURL";
 import IGenre from "../../../models/IGenre";
+import { IMoviesPopUp } from "../../movies/popup/MoviesPopUp";
+import getFullUrl from "../../../tmdb/getFullUrl";
 
 export interface IHeader {
   backgroundImageUrl: string;
@@ -13,7 +15,7 @@ export interface IHeader {
 
 interface Props {
   item: IHeader;
-  onPopUpOpen: (e: React.MouseEvent) => void;
+  onPopUpOpen: (e: React.MouseEvent, data: IMoviesPopUp) => void;
 }
 
 function Header({ item, onPopUpOpen }: Props) {
@@ -32,16 +34,18 @@ function Header({ item, onPopUpOpen }: Props) {
     >
       <div className="header__movie-details">
         <div className="header__movie-texts">
-          {item && <div className="header__movie-data">
-            <VscStarFull className="header__movie-star" />
-            <span className="header__movie-rating">
-              {item?.score.toFixed(1)}
-            </span>
-            |
-            <span className="header__movie-date">
-              {item?.releaseDate.replace(/.{6}$/, "")}
-            </span>
-          </div>}
+          {item && (
+            <div className="header__movie-data">
+              <VscStarFull className="header__movie-star" />
+              <span className="header__movie-rating">
+                {item?.score.toFixed(1)}
+              </span>
+              |
+              <span className="header__movie-date">
+                {item?.releaseDate.replace(/.{6}$/, "")}
+              </span>
+            </div>
+          )}
           <Link to="/" className="header__movie-title">
             {item?.title}
           </Link>
@@ -51,7 +55,15 @@ function Header({ item, onPopUpOpen }: Props) {
                 key={genre.id}
                 className="header__movie-genre"
                 style={{ border: `1px solid ${genre.borderColor}` }}
-                onClick={onPopUpOpen}
+                onClick={(e) =>
+                  onPopUpOpen(e, {
+                    name: genre.name,
+                    url: getFullUrl(
+                      "/discover/movie",
+                      `&with_genres=${genre.id}`
+                    ),
+                  })
+                }
               >
                 {genre.name}
               </span>

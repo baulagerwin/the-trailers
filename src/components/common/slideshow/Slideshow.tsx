@@ -1,15 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import SlideshowItem, { ISlideshowItem } from "./SlideshowItem";
-import { IoIosArrowRoundForward } from "react-icons/io";
+import { IMoviesPopUp } from "../../movies/popup/MoviesPopUp";
 
 interface Props {
+  of: string;
   icon: React.ReactNode;
   type: string;
   items: ISlideshowItem[];
-  onPopUpOpen: (e: React.MouseEvent) => void;
+  onPopUpOpen: (e: React.MouseEvent, data: IMoviesPopUp) => void;
+  url: string;
 }
 
-function Slideshow({ icon, type, items, onPopUpOpen }: Props) {
+function Slideshow({ of, icon, type, items, onPopUpOpen, url }: Props) {
   const itemRef = useRef<HTMLDivElement>(null);
 
   const [isDown, setIsDown] = useState<boolean>(false);
@@ -109,7 +111,7 @@ function Slideshow({ icon, type, items, onPopUpOpen }: Props) {
           <button
             type="button"
             className="slideshow__type-more"
-            onClick={onPopUpOpen}
+            onClick={(e) => onPopUpOpen(e, { name: type, url })}
           >
             <span>See more</span>
             {/* <IoIosArrowRoundForward className="slideshow__type-arrow" /> */}
@@ -131,6 +133,7 @@ function Slideshow({ icon, type, items, onPopUpOpen }: Props) {
           {items?.map((item) => (
             <SlideshowItem
               key={item.id}
+              of={of}
               item={item}
               onPopUpOpen={onPopUpOpen}
             />
