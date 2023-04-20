@@ -10,8 +10,10 @@ import { useQuery } from "@tanstack/react-query";
 const url = "/movie/top_rated";
 const queryString = "&with_genres=16&with_original_language=ja&with_movie=true";
 
+export const animeMoviesUrl = getFullUrl(url, queryString);
+
 async function getAnimeMovies(): Promise<ResultsDto<MovieDto>> {
-  const response = await fetch(getFullUrl(url, queryString));
+  const response = await fetch(animeMoviesUrl);
   const data = await response.json();
 
   return data;

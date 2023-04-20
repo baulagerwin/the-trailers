@@ -1,12 +1,16 @@
-import useAnimeMovies from "./hooks/useAnimeMovies";
+import useAnimeMovies, { animeMoviesUrl } from "./hooks/useAnimeMovies";
 import Header, { IHeader } from "../common/header/Header";
 import { FcFilm, FcFilmReel } from "react-icons/fc";
 import { FiTrendingUp } from "react-icons/fi";
 import { GiFilmProjector } from "react-icons/gi";
 import Slideshow from "../common/slideshow/Slideshow";
-import useTopRatedMovies from "./hooks/useTopRatedMovies";
-import useNowPlayingMovies from "./hooks/useNowPlayingMovies";
-import useTrendingMovies from "./hooks/useTrendingMovies";
+import useTopRatedMovies, {
+  topRatedMoviesUrl,
+} from "./hooks/useTopRatedMovies";
+import useKoreanMovies, { koreanMoviesUrl } from "./hooks/useKoreanMovies";
+import useTrendingMovies, {
+  trendingMoviesUrl,
+} from "./hooks/useTrendingMovies";
 import MoviesLoader from "./loader/MoviesLoader";
 import Footer from "../common/footer/Footer";
 import useMovieGenres from "./hooks/useMovieGenres";
@@ -25,10 +29,10 @@ function Movies() {
 
   const genres = useMovieGenres();
   const trendingMovies = useTrendingMovies(genres);
-  const headerMovie = useHeaderMovie(trendingMovies);
-  const nowPlayingMovies = useNowPlayingMovies(genres);
+  const koreanMovies = useKoreanMovies(genres);
   const topRatedMovies = useTopRatedMovies(genres);
   const animeMovies = useAnimeMovies(genres);
+  const headerMovie = useHeaderMovie(trendingMovies);
 
   const slideshowSelector = (movies: IMovie[]) => {
     return movies.map((movie) => ({
@@ -67,36 +71,33 @@ function Movies() {
             of="movie"
             items={slideshowSelector(trendingMovies)}
             icon={<FiTrendingUp className="slideshow__type-icon" />}
-            type="Trending"
+            type="TRENDING"
             onPopUpOpen={openPopUp}
-            url={getFullUrl("/trending/movie/week")}
+            url={trendingMoviesUrl}
           />
           <Slideshow
             of="movie"
-            items={slideshowSelector(nowPlayingMovies)}
+            items={slideshowSelector(koreanMovies)}
             icon={<FcFilm className="slideshow__type-icon" />}
-            type="Now Showing"
+            type="KMOVIE"
             onPopUpOpen={openPopUp}
-            url={getFullUrl("/movie/now_playing")}
+            url={koreanMoviesUrl}
           />
           <Slideshow
             of="movie"
             items={slideshowSelector(animeMovies)}
             icon={<FcFilmReel className="slideshow__type-icon" />}
-            type="Anime"
+            type="ANIME"
             onPopUpOpen={openPopUp}
-            url={getFullUrl(
-              "/movie/top_rated",
-              "&with_genres=16&with_original_language=ja&with_movie=true"
-            )}
+            url={animeMoviesUrl}
           />
           <Slideshow
             of="movie"
             items={slideshowSelector(topRatedMovies)}
             icon={<GiFilmProjector className="slideshow__type-icon" />}
-            type="Highly Rated"
+            type="HIGHLY RATED"
             onPopUpOpen={openPopUp}
-            url={getFullUrl("/movie/top_rated")}
+            url={topRatedMoviesUrl}
           />
         </div>
         <Footer />

@@ -10,8 +10,10 @@ import { useQuery } from "@tanstack/react-query";
 const url = "/tv/top_rated";
 // const queryString = "&with_original_language=en";
 
-async function getTopRatedTvShows(): Promise<ResultsDto<TvShowDto>> {
-  const response = await fetch(getFullUrl(url));
+export const topRatedTvShowsUrl = getFullUrl(url);
+
+export async function getTopRatedTvShows(): Promise<ResultsDto<TvShowDto>> {
+  const response = await fetch(topRatedTvShowsUrl);
   const data = await response.json();
 
   return data;

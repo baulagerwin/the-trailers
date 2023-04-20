@@ -1,7 +1,7 @@
 const keys = {
   movieGenres: "movieGenres",
   trendingMovies: "trendingMovies",
-  nowPlayingMovies: "nowPlayingMovies",
+  koreanMovies: "koreanMovies",
   topRatedMovies: "topRatedMovies",
   animeMovies: "animeMovies",
   tvShowGenres: "tvShowGenres",

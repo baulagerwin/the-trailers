@@ -10,8 +10,10 @@ import { useQuery } from "@tanstack/react-query";
 const url = "/tv/popular";
 const queryString = "&with_genres=16&with_original_language=ja";
 
+export const animeTvShowsUrl = getFullUrl(url, queryString);
+
 async function getAnimeTvShows(): Promise<ResultsDto<TvShowDto>> {
-  const response = await fetch(getFullUrl(url, queryString));
+  const response = await fetch(animeTvShowsUrl);
   const data = await response.json();
 
   return data;

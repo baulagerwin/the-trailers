@@ -8,9 +8,10 @@ import ResultsDto from "../../../dtos/ResultsDto";
 import { useQuery } from "@tanstack/react-query";
 
 const url = "/trending/tv/week";
+export const trendingTvShowsUrl = getFullUrl(url);
 
 async function getTrendingTvShows(): Promise<ResultsDto<TvShowDto>> {
-  const response = await fetch(getFullUrl(url));
+  const response = await fetch(trendingTvShowsUrl);
   const data = await response.json();
 
   return data;

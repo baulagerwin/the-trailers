@@ -1,16 +1,20 @@
 import useTvShowGenres from "./hooks/useTvShowGenres";
-import useTrendingTvShows from "./hooks/useTrendingTvShows";
+import useTrendingTvShows, {
+  trendingTvShowsUrl,
+} from "./hooks/useTrendingTvShows";
 import Header, { IHeader } from "../common/header/Header";
 import Footer from "../common/footer/Footer";
 import Slideshow from "../common/slideshow/Slideshow";
 import { FiTrendingUp } from "react-icons/fi";
 import useHeaderTvShow from "./hooks/useHeaderTvShow";
 import ITvShow from "../../models/ITvShow";
-import useOnAirTvShows from "./hooks/useOnAirTvshows";
-import useTopRatedTvShows from "./hooks/useTopRatedTvShows";
+import useKoreanDramas, { koreanDramasUrl } from "./hooks/useKoreanDramas";
+import useTopRatedTvShows, {
+  topRatedTvShowsUrl,
+} from "./hooks/useTopRatedTvShows";
 import { FcFilm, FcFilmReel } from "react-icons/fc";
 import { GiFilmProjector } from "react-icons/gi";
-import useAnimeTvShows from "./hooks/useAnimeTvShows";
+import useAnimeTvShows, { animeTvShowsUrl } from "./hooks/useAnimeTvShows";
 import TvShowsLoader from "./loader/TvShowsLoader";
 import useToggleWithAnimation from "../common/hooks/useToggleWithAnimation";
 import { useState } from "react";
@@ -24,10 +28,10 @@ function TvShows() {
   const [popUpData, setPopUpData] = useState<ITvShowsPopUp>();
   const genres = useTvShowGenres();
   const trendingTvShows = useTrendingTvShows(genres);
-  const headerTvShow = useHeaderTvShow(trendingTvShows);
-  const onAirTvShows = useOnAirTvShows(genres);
+  const koreanDramas = useKoreanDramas(genres);
   const topRatedTvShows = useTopRatedTvShows(genres);
   const animeTvShows = useAnimeTvShows(genres);
+  const headerTvShow = useHeaderTvShow(trendingTvShows);
 
   const slideshowSelector = (tvShows: ITvShow[]) => {
     return tvShows.map((tvShow) => ({
@@ -66,36 +70,33 @@ function TvShows() {
             of="tv"
             items={slideshowSelector(trendingTvShows)}
             icon={<FiTrendingUp className="slideshow__type-icon" />}
-            type="Trending"
+            type="TRENDING"
             onPopUpOpen={openPopUp}
-            url={getFullUrl("/trending/movie/week")}
+            url={trendingTvShowsUrl}
           />
           <Slideshow
             of="tv"
-            items={slideshowSelector(onAirTvShows)}
+            items={slideshowSelector(koreanDramas)}
             icon={<FcFilm className="slideshow__type-icon" />}
-            type="On Air"
+            type="KDRAMA"
             onPopUpOpen={openPopUp}
-            url={getFullUrl("/tv/on_the_air", "&with_original_language=en")}
+            url={koreanDramasUrl}
           />
           <Slideshow
             of="tv"
             items={slideshowSelector(animeTvShows)}
             icon={<FcFilmReel className="slideshow__type-icon" />}
-            type="Anime"
+            type="ANIME"
             onPopUpOpen={openPopUp}
-            url={getFullUrl(
-              "/tv/popular",
-              "&with_genres=16&with_original_language=ja"
-            )}
+            url={animeTvShowsUrl}
           />
           <Slideshow
             of="tv"
             items={slideshowSelector(topRatedTvShows)}
             icon={<GiFilmProjector className="slideshow__type-icon" />}
-            type="Top Rated"
+            type="TOP RATED"
             onPopUpOpen={openPopUp}
-            url={getFullUrl("/tv/top_rated")}
+            url={topRatedTvShowsUrl}
           />
         </div>
         <Footer />
