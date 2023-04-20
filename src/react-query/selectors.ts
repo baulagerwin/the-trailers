@@ -1,8 +1,7 @@
 import GenreDto from "../dtos/GenreDto";
 import GenresDto from "../dtos/GenresDto";
 import MovieDto from "../dtos/MovieDto";
-import ResultsWithDateDto from "../dtos/ResultsWithDateDto";
-import ResultsWithoutDateDto from "../dtos/ResultsWithoutDateDto";
+import ResultsDto from "../dtos/ResultsDto";
 import TvShowDto from "../dtos/TvShowDto";
 import IGenre from "../models/IGenre";
 import IMovie from "../models/IMovie";
@@ -17,7 +16,7 @@ export const genresSelector = (data: GenresDto) =>
 
 // Try object keys here
 export const moviesSelector = (
-  data: ResultsWithDateDto<MovieDto> | ResultsWithoutDateDto<MovieDto>,
+  data: ResultsDto<MovieDto>,
   genres: IGenre[]
 ): IMovie[] =>
   data.results.map((movie: MovieDto) => ({
@@ -41,7 +40,7 @@ export const moviesSelector = (
   }));
 
 export const tvShowsSelector = (
-  data: ResultsWithDateDto<TvShowDto> | ResultsWithoutDateDto<TvShowDto>,
+  data: ResultsDto<TvShowDto>,
   genres: IGenre[]
 ): ITvShow[] =>
   data.results.map((tvShow: TvShowDto) => ({

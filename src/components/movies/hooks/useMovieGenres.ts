@@ -1,9 +1,9 @@
-import { useQuery } from "react-query";
 import getFullUrl from "../../../tmdb/getFullUrl";
 import keys from "../../../react-query/keys";
 import GenresDto from "../../../dtos/GenresDto";
 import IGenre from "../../../models/IGenre";
 import { genresSelector } from "../../../react-query/selectors";
+import { useQuery } from "@tanstack/react-query";
 
 const url = "/genre/movie/list";
 
@@ -16,7 +16,10 @@ async function getMovieGenres(): Promise<GenresDto> {
 
 export default function useMovieGenres() {
   const fallback: IGenre[] = [];
-  const { data = fallback } = useQuery(keys.movieGenres, getMovieGenres, {
+
+  const { data = fallback } = useQuery({
+    queryKey: [keys.movieGenres],
+    queryFn: getMovieGenres,
     select: genresSelector,
   });
 

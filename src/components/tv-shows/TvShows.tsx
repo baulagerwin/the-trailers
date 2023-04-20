@@ -1,4 +1,3 @@
-import { useIsFetching } from "react-query";
 import useTvShowGenres from "./hooks/useTvShowGenres";
 import useTrendingTvShows from "./hooks/useTrendingTvShows";
 import Header, { IHeader } from "../common/header/Header";
@@ -14,10 +13,10 @@ import { GiFilmProjector } from "react-icons/gi";
 import useAnimeTvShows from "./hooks/useAnimeTvShows";
 import TvShowsLoader from "./loader/TvShowsLoader";
 import useToggleWithAnimation from "../common/hooks/useToggleWithAnimation";
-import PopUp from "../common/popup/PopUp";
 import { useState } from "react";
 import TvShowsPopUp, { ITvShowsPopUp } from "./popup/TvShowsPopUp";
 import getFullUrl from "../../tmdb/getFullUrl";
+import { useIsFetching } from "@tanstack/react-query";
 
 function TvShows() {
   const isFetching = useIsFetching();

@@ -9,6 +9,7 @@ const keys = {
   onAirTvShows: "onAirTvShows",
   topRatedTvShows: "topRatedTvShows",
   animeTvShows: "animeTvShows",
+  popupMovies: "popupMovies",
 };
 
 export default keys;

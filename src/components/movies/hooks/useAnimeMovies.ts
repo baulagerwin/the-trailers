@@ -1,16 +1,16 @@
-import { useQuery } from "react-query";
 import getFullUrl from "../../../tmdb/getFullUrl";
 import keys from "../../../react-query/keys";
 import IMovie from "../../../models/IMovie";
 import IGenre from "../../../models/IGenre";
 import { moviesSelector } from "../../../react-query/selectors";
-import ResultsWithDateDto from "../../../dtos/ResultsWithDateDto";
 import MovieDto from "../../../dtos/MovieDto";
+import ResultsDto from "../../../dtos/ResultsDto";
+import { useQuery } from "@tanstack/react-query";
 
 const url = "/movie/top_rated";
 const queryString = "&with_genres=16&with_original_language=ja&with_movie=true";
 
-async function getAnimeMovies(): Promise<ResultsWithDateDto<MovieDto>> {
+async function getAnimeMovies(): Promise<ResultsDto<MovieDto>> {
   const response = await fetch(getFullUrl(url, queryString));
   const data = await response.json();
 
@@ -19,7 +19,10 @@ async function getAnimeMovies(): Promise<ResultsWithDateDto<MovieDto>> {
 
 export default function useAnimeMovies(genres: IGenre[]) {
   const fallback: IMovie[] = [];
-  const { data = fallback } = useQuery(keys.animeMovies, getAnimeMovies, {
+
+  const { data = fallback } = useQuery({
+    queryKey: [keys.animeMovies],
+    queryFn: getAnimeMovies,
     select: (data) => moviesSelector(data, genres),
   });
 

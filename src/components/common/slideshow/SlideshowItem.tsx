@@ -43,15 +43,15 @@ function SlideshowItem({ of, item, onPopUpOpen }: Props) {
   }
 
   return (
-    <li
-      className="slideshow__item"
-      onMouseDown={handleOnMouseDown}
-      onMouseUp={handleOnMouseUp}
-      onTouchStart={handleOnTouchStart}
-      onTouchEnd={handleOnTouchEnd}
-    >
+    <li>
       {!!item && (
-        <>
+        <div
+          className="slideshow__item"
+          onMouseDown={handleOnMouseDown}
+          onMouseUp={handleOnMouseUp}
+          onTouchStart={handleOnTouchStart}
+          onTouchEnd={handleOnTouchEnd}
+        >
           <div className="slideshow__image">
             <div className="slideshow__cover"></div>
             <img src={basePosterURL + item.imageUrl} alt="Poster" />
@@ -84,7 +84,7 @@ function SlideshowItem({ of, item, onPopUpOpen }: Props) {
               {item.genres[item.genres.length - 1]?.name}
             </span>
           </div>
-        </>
+        </div>
       )}
     </li>
   );

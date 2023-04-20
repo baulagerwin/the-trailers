@@ -8,7 +8,6 @@ import useTopRatedMovies from "./hooks/useTopRatedMovies";
 import useNowPlayingMovies from "./hooks/useNowPlayingMovies";
 import useTrendingMovies from "./hooks/useTrendingMovies";
 import MoviesLoader from "./loader/MoviesLoader";
-import { useIsFetching } from "react-query";
 import Footer from "../common/footer/Footer";
 import useMovieGenres from "./hooks/useMovieGenres";
 import useHeaderMovie from "./hooks/useHeaderMovie";
@@ -17,11 +16,13 @@ import useToggleWithAnimation from "../common/hooks/useToggleWithAnimation";
 import MoviesPopUp, { IMoviesPopUp } from "./popup/MoviesPopUp";
 import { useState } from "react";
 import getFullUrl from "../../tmdb/getFullUrl";
+import { useIsFetching } from "@tanstack/react-query";
 
 function Movies() {
   const isFetching = useIsFetching();
   const { status, handleOnOpen, handleOnClose } = useToggleWithAnimation();
   const [popUpData, setPopUpData] = useState<IMoviesPopUp>();
+
   const genres = useMovieGenres();
   const trendingMovies = useTrendingMovies(genres);
   const headerMovie = useHeaderMovie(trendingMovies);

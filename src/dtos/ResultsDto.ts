@@ -1,5 +1,5 @@
-export default interface ResultsWithDateDto<T> {
-  dates: {
+export default interface ResultsDto<T> {
+  dates?: {
     maximum: string;
     minimum: string;
   };
