@@ -7,8 +7,11 @@ import MovieDto from "../../../dtos/MovieDto";
 import ResultsDto from "../../../dtos/ResultsDto";
 import { useQuery } from "@tanstack/react-query";
 
-const url = "/movie/top_rated";
-const queryString = "&with_genres=16&with_original_language=ja&with_movie=true";
+const today = new Date();
+const formattedDate = today.toISOString().slice(0, 10);
+
+const url = "/discover/movie";
+const queryString = `&with_genres=16&sort_by=popularity.desc&include_adult=false&primary_release_date.lte=${formattedDate}&with_original_language=ja`;
 
 export const animeMoviesUrl = getFullUrl(url, queryString);
 
