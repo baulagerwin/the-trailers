@@ -7,9 +7,11 @@ import MovieDto from "../../../dtos/MovieDto";
 import ResultsDto from "../../../dtos/ResultsDto";
 import { useQuery } from "@tanstack/react-query";
 
+const today = new Date();
+const formattedDate = today.toISOString().slice(0, 10);
+
 const url = "/discover/movie";
-const queryString =
-  "&language=en-US&region=KR&sort_by=popularity.desc&page=1&with_original_language=ko&certification_country=KR&certification.lte=18";
+const queryString = `&language=en-US&region=KR&sort_by=popularity.desc&with_original_language=ko&certification_country=KR&certification.lte=18&include_adult=false&without_genres=99&release_date.lte=${formattedDate}`;
 
 export const koreanMoviesUrl = getFullUrl(url, queryString);
 
