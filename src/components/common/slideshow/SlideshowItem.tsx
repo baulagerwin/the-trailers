@@ -3,8 +3,8 @@ import basePosterURL from "../../../tmdb/basePosterURL";
 import getMonthDay from "../../../utils/getMonthDay";
 import { useState } from "react";
 import IGenre from "../../../models/IGenre";
-import { IMoviesPopUp } from "../../movies/popup/MoviesPopUp";
 import getFullUrl from "../../../tmdb/getFullUrl";
+import { IPopUpCategory } from "../../movies/popup/PopUpMovies";
 
 export interface ISlideshowItem {
   id: number;
@@ -17,7 +17,7 @@ export interface ISlideshowItem {
 interface Props {
   of: string;
   item: ISlideshowItem;
-  onPopUpOpen: (e: React.MouseEvent, data: IMoviesPopUp) => void;
+  onPopUpOpen: (e: React.MouseEvent, data: IPopUpCategory) => void;
 }
 
 function SlideshowItem({ of, item, onPopUpOpen }: Props) {

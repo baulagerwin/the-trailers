@@ -16,10 +16,9 @@ import { FcFilm, FcFilmReel } from "react-icons/fc";
 import { GiFilmProjector } from "react-icons/gi";
 import useAnimeTvShows, { animeTvShowsUrl } from "./hooks/useAnimeTvShows";
 import TvShowsLoader from "./loader/TvShowsLoader";
-import useToggleWithAnimation from "../common/hooks/useToggleWithAnimation";
+import useToggleWithAnimation from "../../hooks/useTransitionAnimation";
 import { useState } from "react";
 import TvShowsPopUp, { ITvShowsPopUp } from "./popup/TvShowsPopUp";
-import getFullUrl from "../../tmdb/getFullUrl";
 import { useIsFetching } from "@tanstack/react-query";
 
 function TvShows() {
@@ -70,7 +69,7 @@ function TvShows() {
             of="tv"
             items={slideshowSelector(trendingTvShows)}
             icon={<FiTrendingUp className="slideshow__type-icon" />}
-            type="TRENDING"
+            type="Trending"
             onPopUpOpen={openPopUp}
             url={trendingTvShowsUrl}
           />
@@ -78,7 +77,7 @@ function TvShows() {
             of="tv"
             items={slideshowSelector(koreanDramas)}
             icon={<FcFilm className="slideshow__type-icon" />}
-            type="KDRAMA"
+            type="KDrama"
             onPopUpOpen={openPopUp}
             url={koreanDramasUrl}
           />
@@ -86,7 +85,7 @@ function TvShows() {
             of="tv"
             items={slideshowSelector(animeTvShows)}
             icon={<FcFilmReel className="slideshow__type-icon" />}
-            type="ANIME"
+            type="Anime"
             onPopUpOpen={openPopUp}
             url={animeTvShowsUrl}
           />
@@ -94,7 +93,7 @@ function TvShows() {
             of="tv"
             items={slideshowSelector(topRatedTvShows)}
             icon={<GiFilmProjector className="slideshow__type-icon" />}
-            type="TOP RATED"
+            type="Top Rated"
             onPopUpOpen={openPopUp}
             url={topRatedTvShowsUrl}
           />

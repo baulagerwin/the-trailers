@@ -2,7 +2,7 @@ import { VscStarFull } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import baseBackDropURL from "../../../tmdb/baseBackDropURL";
 import IGenre from "../../../models/IGenre";
-import { IMoviesPopUp } from "../../movies/popup/MoviesPopUp";
+import { IMoviesPopUp } from "../../movies/popup/PopUpMovies";
 import getFullUrl from "../../../tmdb/getFullUrl";
 
 export interface IHeader {

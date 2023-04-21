@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function useToggleWithAnimation() {
+function useTransitionAnimation() {
   const [status, setStatus] = useState("");
 
   function handleOnClose() {
@@ -36,4 +36,4 @@ function useToggleWithAnimation() {
   return { status, handleOnOpen, handleOnClose };
 }
 
-export default useToggleWithAnimation;
+export default useTransitionAnimation;

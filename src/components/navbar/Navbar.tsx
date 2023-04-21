@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FiSearch } from "react-icons/fi";
-import useToggleWithAnimation from "../common/hooks/useToggleWithAnimation";
+import useTransitionAnimation from "../../hooks/useTransitionAnimation";
 
 function Navbar() {
-  const { status, handleOnOpen, handleOnClose } = useToggleWithAnimation();
+  const { status, handleOnOpen, handleOnClose } = useTransitionAnimation();
 
   return (
     <div className="navbar">

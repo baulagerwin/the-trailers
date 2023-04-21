@@ -30,7 +30,7 @@ function PopUp({ children, status, onClose }: Props) {
       }}
     >
       <div
-        className={`content ${
+        className={`popup__content ${
           status === "open" && "u__animation--popup-content-open"
         } ${status === "close" && "u__animation--popup-content-close"}`}
         onClick={(e) => e.stopPropagation()}

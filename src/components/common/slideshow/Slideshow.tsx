@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import SlideshowItem, { ISlideshowItem } from "./SlideshowItem";
-import { IMoviesPopUp } from "../../movies/popup/MoviesPopUp";
+import { IPopUpCategory } from "../../movies/popup/PopUpMovies";
 
 interface Props {
   of: string;
   icon: React.ReactNode;
   type: string;
   items: ISlideshowItem[];
-  onPopUpOpen: (e: React.MouseEvent, data: IMoviesPopUp) => void;
+  onPopUpOpen: (e: React.MouseEvent, data: IPopUpCategory) => void;
   url: string;
 }
 
