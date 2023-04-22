@@ -6,10 +6,11 @@ const keys = {
   animeMovies: "animeMovies",
   tvShowGenres: "tvShowGenres",
   trendingTvShows: "trendingTvShows",
-  onAirTvShows: "onAirTvShows",
+  koreanDramas: "koreanDramas",
   topRatedTvShows: "topRatedTvShows",
   animeTvShows: "animeTvShows",
   popupMovies: "popupMovies",
+  popupTvShows: "popupTvShows",
 };
 
 export default keys;

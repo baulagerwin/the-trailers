@@ -23,16 +23,6 @@ function useTransitionAnimation() {
     return () => document.removeEventListener("click", handleOnClose);
   }, [status]);
 
-  useEffect(() => {
-    if (status === "open") {
-      document.body.style.overflow = "hidden";
-
-      return () => {
-        document.body.style.overflow = "visible";
-      };
-    }
-  }, [status]);
-
   return { status, handleOnOpen, handleOnClose };
 }
 

@@ -2,9 +2,11 @@ import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FiSearch } from "react-icons/fi";
 import useTransitionAnimation from "../../hooks/useTransitionAnimation";
+import useDisableMainScrollbar from "../../hooks/useDisableMainScrollbar";
 
 function Navbar() {
   const { status, handleOnOpen, handleOnClose } = useTransitionAnimation();
+  useDisableMainScrollbar(status);
 
   return (
     <div className="navbar">

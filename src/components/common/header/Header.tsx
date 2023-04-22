@@ -34,49 +34,49 @@ function Header({ item, onPopUpOpen }: Props) {
     >
       <div className="header__movie-details">
         <div className="header__movie-texts">
-          <div className="header__movie-data">
-            <VscStarFull className="header__movie-star" />
-            {!!item?.score && (
+          {!!item && (
+            <div className="header__movie-data">
+              <VscStarFull className="header__movie-star" />
               <span className="header__movie-rating">
                 {item?.score.toFixed(1)}
               </span>
-            )}
-            |
-            {!!item?.releaseDate && (
+              |
               <span className="header__movie-date">
                 {item?.releaseDate.replace(/.{6}$/, "")}
               </span>
-            )}
-          </div>
+            </div>
+          )}
           {!!item?.title && (
             <Link to="/" className="header__movie-title">
               {item?.title}
             </Link>
           )}
-          <div className="header__movie-genres">
-            {item?.genres.map((genre) => (
-              <span
-                key={genre.id}
-                className="header__movie-genre"
-                style={{
-                  border: `1px solid ${
-                    genre.borderColor ? genre.borderColor : "white"
-                  }`,
-                }}
-                onClick={(e) =>
-                  onPopUpOpen(e, {
-                    name: genre.name,
-                    url: getFullUrl(
-                      "/discover/movie",
-                      `&with_genres=${genre.id}`
-                    ),
-                  })
-                }
-              >
-                {genre.name}
-              </span>
-            ))}
-          </div>
+          {!!item && (
+            <div className="header__movie-genres">
+              {item?.genres.map((genre) => (
+                <span
+                  key={genre.id}
+                  className="header__movie-genre"
+                  style={{
+                    border: `1px solid ${
+                      genre.borderColor ? genre.borderColor : "white"
+                    }`,
+                  }}
+                  onClick={(e) =>
+                    onPopUpOpen(e, {
+                      name: genre.name,
+                      url: getFullUrl(
+                        "/discover/movie",
+                        `&with_genres=${genre.id}`
+                      ),
+                    })
+                  }
+                >
+                  {genre.name}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </header>

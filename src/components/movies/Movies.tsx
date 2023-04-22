@@ -6,10 +6,7 @@ import Slideshow from "../common/slideshow/Slideshow";
 import MoviesLoader from "./loader/MoviesLoader";
 import Footer from "../common/footer/Footer";
 import useMovieGenres from "./hooks/useMovieGenres";
-import useHeaderMovie from "./hooks/useHeaderMovie";
 import IMovie from "../../models/IMovie";
-import PopUpMovies, { IPopUpCategory } from "./popup/PopUpMovies";
-import usePopUpMovies from "./hooks/usePopUpMovies";
 import useQueryFilms from "../../hooks/useQueryFilms";
 import keys from "../../react-query/keys";
 import getTrendingMovies, {
@@ -22,10 +19,18 @@ import getTopRatedMovies, {
 } from "./services/getTopRatedMovies";
 import { animeMoviesUrl, getAnimeMovies } from "./services/getAnimeMovies";
 import { useCallback } from "react";
+import PopUpFilms from "../common/popupFilms/PopUpFilms";
+import useHeaderFilm from "../../hooks/useHeaderFilm";
+import usePopUpFilms from "../../hooks/useQueryPopUpFilms";
+import MovieDto from "../../dtos/MovieDto";
 
 function Movies() {
   const genres = useMovieGenres();
-  const popUpMovies = usePopUpMovies(genres);
+  const popUpMovies = usePopUpFilms<MovieDto, IMovie>(
+    keys.popupMovies,
+    moviesSelector,
+    genres
+  );
 
   const trendingMovies = useQueryFilms(
     genres,
@@ -54,7 +59,7 @@ function Movies() {
     getAnimeMovies,
     moviesSelector
   );
-  const headerMovie = useHeaderMovie(trendingMovies.data);
+  const headerMovie = useHeaderFilm<IMovie>(trendingMovies.data);
 
   const slideshowSelector = useCallback((movies: IMovie[]) => {
     return movies.map((movie) => ({
@@ -77,11 +82,11 @@ function Movies() {
   return (
     <>
       {!!popUpMovies.status && (
-        <PopUpMovies
-          category={popUpMovies.category as IPopUpCategory}
-          status={popUpMovies.status}
-          infiniteMovies={popUpMovies.infiniteMovies}
+        <PopUpFilms
+          category={popUpMovies.category}
+          infiniteFilms={popUpMovies.infiniteFilms}
           fetchNextPage={popUpMovies.fetchNextPage}
+          status={popUpMovies.status}
           onClose={popUpMovies.closePopUp}
         />
       )}
@@ -103,7 +108,7 @@ function Movies() {
             of="movie"
             items={slideshowSelector(koreanMovies.data)}
             icon={<FcFilm className="slideshow__type-icon" />}
-            type="KMovie"
+            type="K-Movies"
             onPopUpOpen={popUpMovies.openPopUp}
             url={koreanMoviesUrl}
           />

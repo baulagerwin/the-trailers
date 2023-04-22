@@ -1,22 +1,18 @@
-import keys from "../../../react-query/keys";
-import IMovie from "../../../models/IMovie";
-import MovieDto from "../../../dtos/MovieDto";
-import ResultsDto from "../../../dtos/ResultsDto";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { IPopUpCategory } from "../components/common/popupFilms/PopUpFilms";
+import ResultsDto from "../dtos/ResultsDto";
+import IGenre from "../models/IGenre";
+import useTransitionAnimation from "./useTransitionAnimation";
 import { useState } from "react";
-import useTransitionAnimation from "../../../hooks/useTransitionAnimation";
-import { IPopUpCategory } from "../popup/PopUpMovies";
-import IGenre from "../../../models/IGenre";
-import { moviesSelector } from "../../../react-query/selectors";
 
-async function getPopUpMovies(url: string): Promise<ResultsDto<MovieDto>> {
+async function getPopUpFilms<T>(url: string): Promise<ResultsDto<T>> {
   const response = await fetch(url);
   const data = await response.json();
 
   return data;
 }
 
-function useQueryPopUpMovies(category: IPopUpCategory) {
+function useQueryPopUpFilms<T>(key: string, category: IPopUpCategory) {
   const fallback = {
     pageParams: [],
     pages: [],
@@ -27,24 +23,29 @@ function useQueryPopUpMovies(category: IPopUpCategory) {
     isFetching,
     fetchNextPage,
   } = useInfiniteQuery({
-    queryKey: [keys.popupMovies, category.name],
+    queryKey: [key, category.name],
     queryFn: ({ pageParam = 1 }) =>
-      getPopUpMovies(category.url + `&page=${pageParam}`),
+      getPopUpFilms<T>(category.url + `&page=${pageParam}`),
     getNextPageParam: (lastPage, allPages) => lastPage.page + 1 || undefined,
+    cacheTime: 0,
     enabled: !!category.url,
   });
 
-  return { infiniteMovies: data.pages, fetchNextPage };
+  return { infiniteFilms: data.pages, fetchNextPage };
 }
 
-export default function usePopUpMovies(genres: IGenre[]) {
+export default function usePopUpFilms<T, K>(
+  key: string,
+  selector: (data: ResultsDto<T>, genres: IGenre[]) => K[],
+  genres: IGenre[]
+) {
   const { status, handleOnOpen, handleOnClose } = useTransitionAnimation();
   const [category, setCategory] = useState<IPopUpCategory>({
     name: "",
     url: "",
   });
 
-  const { infiniteMovies, fetchNextPage } = useQueryPopUpMovies(category);
+  const { infiniteFilms, fetchNextPage } = useQueryPopUpFilms<T>(key, category);
 
   function openPopUp(e: React.MouseEvent, data: IPopUpCategory) {
     setCategory(data);
@@ -59,7 +60,7 @@ export default function usePopUpMovies(genres: IGenre[]) {
     handleOnClose();
   }
   return {
-    infiniteMovies: infiniteMovies.map((page) => moviesSelector(page, genres)),
+    infiniteFilms: infiniteFilms.map((page) => selector(page, genres)),
     fetchNextPage,
     category,
     status,
