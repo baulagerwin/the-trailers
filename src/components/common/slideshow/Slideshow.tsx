@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import SlideshowItem, { ISlideshowItem } from "./SlideshowItem";
-import { IPopUpCategory } from "../../movies/popup/PopUpMovies";
+import { IPopUpCategory } from "../popupFilms/PopUpFilms";
 
 interface Props {
   of: string;

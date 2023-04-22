@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import baseBackDropURL from "../../../tmdb/baseBackDropURL";
 import IGenre from "../../../models/IGenre";
 import getFullUrl from "../../../tmdb/getFullUrl";
-import { IPopUpCategory } from "../../movies/popup/PopUpMovies";
+import { IPopUpCategory } from "../popupFilms/PopUpFilms";
 
 export interface IHeader {
   backgroundImageUrl: string;

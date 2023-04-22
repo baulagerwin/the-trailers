@@ -4,7 +4,7 @@ import getMonthDay from "../../../utils/getMonthDay";
 import { useState } from "react";
 import IGenre from "../../../models/IGenre";
 import getFullUrl from "../../../tmdb/getFullUrl";
-import { IPopUpCategory } from "../../movies/popup/PopUpMovies";
+import { IPopUpCategory } from "../popupFilms/PopUpFilms";
 
 export interface ISlideshowItem {
   id: number;
