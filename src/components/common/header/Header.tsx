@@ -14,11 +14,12 @@ export interface IHeader {
 }
 
 interface Props {
+  of: string;
   item: IHeader;
   onPopUpOpen: (e: React.MouseEvent, data: IPopUpCategory) => void;
 }
 
-function Header({ item, onPopUpOpen }: Props) {
+function Header({ of, item, onPopUpOpen }: Props) {
   return (
     <header
       className="header"
@@ -66,7 +67,7 @@ function Header({ item, onPopUpOpen }: Props) {
                     onPopUpOpen(e, {
                       name: genre.name,
                       url: getFullUrl(
-                        "/discover/movie",
+                        `/discover/${of}`,
                         `&with_genres=${genre.id}`
                       ),
                     })

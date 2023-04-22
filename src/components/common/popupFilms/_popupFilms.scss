@@ -54,9 +54,7 @@
   }
 
   &__items {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    padding-bottom: 2rem;
     padding-right: 1rem;
 
     @include respond(tablet) {
@@ -66,11 +64,13 @@
     li {
       display: grid;
       grid-template-columns: repeat(4, minmax(18rem, 1fr));
+      grid-template-rows: repeat(4, 36rem);
       justify-items: center;
       gap: 2rem;
 
       @include respond(phone-large) {
         grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(4, 36rem);
         justify-items: center;
       }
     }

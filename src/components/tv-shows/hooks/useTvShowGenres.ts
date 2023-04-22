@@ -23,7 +23,5 @@ export default function useTvShowGenres() {
     select: genresSelector,
   });
 
-  console.log(data);
-
   return data;
 }

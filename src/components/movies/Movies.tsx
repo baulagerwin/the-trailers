@@ -79,12 +79,16 @@ function Movies() {
   )
     return <MoviesLoader />;
 
+  console.log(popUpMovies.infiniteFilms);
+
   return (
     <>
       {!!popUpMovies.status && (
         <PopUpFilms
           category={popUpMovies.category}
           infiniteFilms={popUpMovies.infiniteFilms}
+          isInitialLoading={popUpMovies.isInitialLoading}
+          isFetching={popUpMovies.isFetching}
           fetchNextPage={popUpMovies.fetchNextPage}
           status={popUpMovies.status}
           onClose={popUpMovies.closePopUp}
@@ -92,6 +96,7 @@ function Movies() {
       )}
       <div className="movies">
         <Header
+          of="movie"
           item={headerMovie as IHeader}
           onPopUpOpen={popUpMovies.openPopUp}
         />

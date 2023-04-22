@@ -82,6 +82,8 @@ function TvShows() {
         <PopUpFilms
           category={popupTvShows.category}
           infiniteFilms={popupTvShows.infiniteFilms}
+          isInitialLoading={popupTvShows.isInitialLoading}
+          isFetching={popupTvShows.isFetching}
           fetchNextPage={popupTvShows.fetchNextPage}
           status={popupTvShows.status}
           onClose={popupTvShows.closePopUp}
@@ -89,6 +91,7 @@ function TvShows() {
       )}
       <div className="tv-shows">
         <Header
+          of="tv"
           item={headerTvShow as IHeader}
           onPopUpOpen={popupTvShows.openPopUp}
         />

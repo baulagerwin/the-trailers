@@ -20,6 +20,7 @@ function useQueryPopUpFilms<T>(key: string, category: IPopUpCategory) {
 
   const {
     data = fallback,
+    isInitialLoading,
     isFetching,
     fetchNextPage,
   } = useInfiniteQuery({
@@ -31,7 +32,12 @@ function useQueryPopUpFilms<T>(key: string, category: IPopUpCategory) {
     enabled: !!category.url,
   });
 
-  return { infiniteFilms: data.pages, fetchNextPage };
+  return {
+    infiniteFilms: data.pages,
+    isInitialLoading,
+    isFetching,
+    fetchNextPage,
+  };
 }
 
 export default function usePopUpFilms<T, K>(
@@ -45,7 +51,8 @@ export default function usePopUpFilms<T, K>(
     url: "",
   });
 
-  const { infiniteFilms, fetchNextPage } = useQueryPopUpFilms<T>(key, category);
+  const { infiniteFilms, isInitialLoading, isFetching, fetchNextPage } =
+    useQueryPopUpFilms<T>(key, category);
 
   function openPopUp(e: React.MouseEvent, data: IPopUpCategory) {
     setCategory(data);
@@ -60,7 +67,12 @@ export default function usePopUpFilms<T, K>(
     handleOnClose();
   }
   return {
-    infiniteFilms: infiniteFilms.map((page) => selector(page, genres)),
+    infiniteFilms: infiniteFilms.map((page) => ({
+      ...page,
+      results: selector(page, genres),
+    })),
+    isInitialLoading,
+    isFetching,
     fetchNextPage,
     category,
     status,
