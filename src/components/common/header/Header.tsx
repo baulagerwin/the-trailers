@@ -55,26 +55,28 @@ function Header({ of, item, onPopUpOpen }: Props) {
           {!!item && (
             <div className="header__movie-genres">
               {item?.genres.map((genre) => (
-                <span
-                  key={genre.id}
-                  className="header__movie-genre"
-                  style={{
-                    border: `1px solid ${
-                      genre.borderColor ? genre.borderColor : "white"
-                    }`,
-                  }}
-                  onClick={(e) =>
-                    onPopUpOpen(e, {
-                      name: genre.name,
-                      url: getFullUrl(
-                        `/discover/${of}`,
-                        `&with_genres=${genre.id}`
-                      ),
-                    })
-                  }
-                >
-                  {genre.name}
-                </span>
+                <>
+                  {genre.borderColor && (
+                    <span
+                      key={genre.id}
+                      className="header__movie-genre"
+                      style={{
+                        border: `1px solid ${genre.borderColor}`,
+                      }}
+                      onClick={(e) =>
+                        onPopUpOpen(e, {
+                          name: genre.name,
+                          url: getFullUrl(
+                            `/discover/${of}`,
+                            `&with_genres=${genre.id}`
+                          ),
+                        })
+                      }
+                    >
+                      {genre.name}
+                    </span>
+                  )}
+                </>
               ))}
             </div>
           )}

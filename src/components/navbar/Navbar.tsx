@@ -29,11 +29,7 @@ function Navbar() {
         </Link>
       </div>
       <div className="navbar__search">
-        <input
-          type="text"
-          className="navbar__input"
-          placeholder="Search for a movie"
-        />
+        <input type="text" className="navbar__input" placeholder="Search" />
         <FiSearch className="navbar__magnifying-glass" />
       </div>
     </div>

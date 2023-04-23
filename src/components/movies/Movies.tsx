@@ -79,8 +79,6 @@ function Movies() {
   )
     return <MoviesLoader />;
 
-  console.log(popUpMovies.infiniteFilms);
-
   return (
     <>
       {!!popUpMovies.status && (

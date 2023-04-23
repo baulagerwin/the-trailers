@@ -74,15 +74,17 @@ function SlideshowItem({ of, item, onPopUpOpen }: Props) {
                 })
               }
             ></div>
-            <span
-              style={{
-                border: `1px solid ${
-                  item.genres[item.genres.length - 1]?.borderColor
-                }`,
-              }}
-            >
-              {item.genres[item.genres.length - 1]?.name}
-            </span>
+            {item.genres[item.genres.length - 1]?.borderColor && (
+              <span
+                style={{
+                  border: `1px solid ${
+                    item.genres[item.genres.length - 1]?.borderColor
+                  }`,
+                }}
+              >
+                {item.genres[item.genres.length - 1]?.name}
+              </span>
+            )}
           </div>
         </div>
       )}
