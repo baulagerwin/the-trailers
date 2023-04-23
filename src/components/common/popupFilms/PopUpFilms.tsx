@@ -77,43 +77,46 @@ function PopUpFilms<T extends IFilm>({
                 loader={isFetching && <PopUpFilmsLoader />}
                 dataLength={infiniteFilms.length}
                 scrollableTarget="body"
-                scrollThreshold={0.96}
+                scrollThreshold={0.9}
               >
                 <ul className="popup__items">
                   <li>
-                    {films.results.map((film) => (
-                      <div key={film.id} className="popup__item">
-                        <div className="popup__image">
-                          <img
-                            src={basePosterURL + film.poster_path}
-                            alt="Poster"
-                          />
-                        </div>
-                        <div className="popup__title">
-                          {film?.title || film?.name}
-                        </div>
-                        {film?.release_date ? (
-                          <div className="popup__release-date">
-                            {getMonthDay(film?.release_date as string)}
+                    {films.results
+                      .filter((r) => r.poster_path)
+                      .map((film) => (
+                        <div key={film.id} className="popup__item">
+                          <div className="popup__image">
+                            <img
+                              src={basePosterURL + film.poster_path}
+                              alt="Poster"
+                            />
                           </div>
-                        ) : (
-                          <div className="popup__release-date">
-                            {getMonthDay(film?.first_air_date as string)}
+                          <div className="popup__title">
+                            {film?.title || film?.name}
                           </div>
-                        )}
-                        <div className="popup__genre">
-                          <span
-                            style={{
-                              border: `1px solid ${
-                                film.genres[film.genres.length - 1]?.borderColor
-                              }`,
-                            }}
-                          >
-                            {film.genres[film.genres.length - 1]?.name}
-                          </span>
+                          {film?.release_date ? (
+                            <div className="popup__release-date">
+                              {getMonthDay(film?.release_date as string)}
+                            </div>
+                          ) : (
+                            <div className="popup__release-date">
+                              {getMonthDay(film?.first_air_date as string)}
+                            </div>
+                          )}
+                          <div className="popup__genre">
+                            <span
+                              style={{
+                                border: `1px solid ${
+                                  film.genres[film.genres.length - 1]
+                                    ?.borderColor
+                                }`,
+                              }}
+                            >
+                              {film.genres[film.genres.length - 1]?.name}
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
                   </li>
                 </ul>
               </InfiniteScroll>
