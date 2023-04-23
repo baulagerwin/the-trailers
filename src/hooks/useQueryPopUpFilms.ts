@@ -2,7 +2,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { IPopUpCategory } from "../components/common/popupFilms/PopUpFilms";
 import ResultsDto from "../dtos/ResultsDto";
 import IGenre from "../models/IGenre";
-import useTransitionAnimation from "./useTransitionAnimation";
+import useOverlayTransition from "./useOverlayTransition";
 import { useState } from "react";
 
 async function getPopUpFilms<T>(url: string): Promise<ResultsDto<T>> {
@@ -45,7 +45,7 @@ export default function usePopUpFilms<T, K>(
   selector: (data: ResultsDto<T>, genres: IGenre[]) => K[],
   genres: IGenre[]
 ) {
-  const { status, handleOnOpen, handleOnClose } = useTransitionAnimation();
+  const { status, handleOnOpen, handleOnClose } = useOverlayTransition();
   const [category, setCategory] = useState<IPopUpCategory>({
     name: "",
     url: "",
@@ -66,6 +66,7 @@ export default function usePopUpFilms<T, K>(
     });
     handleOnClose();
   }
+
   return {
     infiniteFilms: infiniteFilms.map((page) => ({
       ...page,

@@ -1,5 +1,7 @@
 .movies-loader {
+  z-index: 1;
+
   &__body {
-    background-color: black;
+    background-color: $background-color;
   }
 }

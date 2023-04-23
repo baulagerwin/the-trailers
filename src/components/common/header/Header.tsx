@@ -35,7 +35,7 @@ function Header({ of, item, onPopUpOpen }: Props) {
     >
       <div className="header__movie-details">
         <div className="header__movie-texts">
-          {!!item && (
+          {!!item?.score && !!item?.releaseDate && (
             <div className="header__movie-data">
               <VscStarFull className="header__movie-star" />
               <span className="header__movie-rating">
@@ -52,13 +52,12 @@ function Header({ of, item, onPopUpOpen }: Props) {
               {item?.title}
             </Link>
           )}
-          {!!item && (
+          {!!item.genres.length && (
             <div className="header__movie-genres">
               {item?.genres.map((genre) => (
-                <>
+                <div key={genre.id}>
                   {genre.borderColor && (
                     <span
-                      key={genre.id}
                       className="header__movie-genre"
                       style={{
                         border: `1px solid ${genre.borderColor}`,
@@ -76,7 +75,7 @@ function Header({ of, item, onPopUpOpen }: Props) {
                       {genre.name}
                     </span>
                   )}
-                </>
+                </div>
               ))}
             </div>
           )}

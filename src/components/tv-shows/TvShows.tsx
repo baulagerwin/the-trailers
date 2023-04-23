@@ -21,41 +21,63 @@ import {
 } from "./services/getTopRatedTvShows";
 import { animeTvShowsUrl } from "./services/getAnimeTvShows";
 import useHeaderFilm from "../../hooks/useHeaderFilm";
-import usePopUpFilms from "../../hooks/useQueryPopUpFilms";
+import useQueryPopUpFilms from "../../hooks/useQueryPopUpFilms";
 import PopUpFilms from "../common/popupFilms/PopUpFilms";
 import TvShowDto from "../../dtos/TvShowDto";
+import Search from "../common/search/Search";
+import { useSearchParams } from "react-router-dom";
+import useSearchFilm from "../../hooks/useSearchFilm";
+import { getSearchTvShows } from "./services/getSearchTvShows";
 
 function TvShows() {
+  const [searchParams] = useSearchParams();
+  const isSearching = !!searchParams.get("q");
+  const query = searchParams.get("q");
+
   const genres = useTvShowGenres();
-  const popupTvShows = usePopUpFilms<TvShowDto, ITvShow>(
+
+  const searchedTvShows = useSearchFilm<TvShowDto, ITvShow>(
+    query as string,
+    genres,
+    keys.searchedMovies,
+    getSearchTvShows,
+    tvShowsSelector
+  );
+
+  const popupTvShows = useQueryPopUpFilms<TvShowDto, ITvShow>(
     keys.popupTvShows,
     tvShowsSelector,
     genres
   );
+
   const trendingTvShows = useQueryFilms(
     genres,
     keys.trendingTvShows,
     getTrendingTvShows,
     tvShowsSelector
   );
+
   const koreanDramas = useQueryFilms(
     genres,
     keys.koreanDramas,
     getKoreanDramas,
     tvShowsSelector
   );
+
   const topRatedTvShows = useQueryFilms(
     genres,
     keys.topRatedTvShows,
     getTopRatedTvShows,
     tvShowsSelector
   );
+
   const animeTvShows = useQueryFilms(
     genres,
     keys.animeTvShows,
     getAnimeTvShows,
     tvShowsSelector
   );
+
   const headerTvShow = useHeaderFilm<ITvShow>(trendingTvShows.data);
 
   const slideshowSelector = (tvShows: ITvShow[]) => {
@@ -89,47 +111,50 @@ function TvShows() {
           onClose={popupTvShows.closePopUp}
         />
       )}
-      <div className="tv-shows">
+      {isSearching && <Search results={searchedTvShows.data} />}
+      <div className={`tv-shows ${isSearching && "u__animation--search-open"}`}>
         <Header
           of="tv"
           item={headerTvShow as IHeader}
           onPopUpOpen={popupTvShows.openPopUp}
         />
-        <div className="tv-shows__body">
-          <Slideshow
-            of="tv"
-            items={slideshowSelector(trendingTvShows.data)}
-            icon={<FiTrendingUp className="slideshow__type-icon" />}
-            type="Trending"
-            onPopUpOpen={popupTvShows.openPopUp}
-            url={trendingTvShowsUrl}
-          />
-          <Slideshow
-            of="tv"
-            items={slideshowSelector(koreanDramas.data)}
-            icon={<FcFilm className="slideshow__type-icon" />}
-            type="K-Drama"
-            onPopUpOpen={popupTvShows.openPopUp}
-            url={koreanDramasUrl}
-          />
-          <Slideshow
-            of="tv"
-            items={slideshowSelector(animeTvShows.data)}
-            icon={<FcFilmReel className="slideshow__type-icon" />}
-            type="Anime"
-            onPopUpOpen={popupTvShows.openPopUp}
-            url={animeTvShowsUrl}
-          />
-          <Slideshow
-            of="tv"
-            items={slideshowSelector(topRatedTvShows.data)}
-            icon={<GiFilmProjector className="slideshow__type-icon" />}
-            type="Top Rated"
-            onPopUpOpen={popupTvShows.openPopUp}
-            url={topRatedTvShowsUrl}
-          />
-        </div>
-        <Footer />
+        {!isSearching && (
+          <div className="tv-shows__body">
+            <Slideshow
+              of="tv"
+              items={slideshowSelector(trendingTvShows.data)}
+              icon={<FiTrendingUp className="slideshow__type-icon" />}
+              type="Trending"
+              onPopUpOpen={popupTvShows.openPopUp}
+              url={trendingTvShowsUrl}
+            />
+            <Slideshow
+              of="tv"
+              items={slideshowSelector(koreanDramas.data)}
+              icon={<FcFilm className="slideshow__type-icon" />}
+              type="K-Drama"
+              onPopUpOpen={popupTvShows.openPopUp}
+              url={koreanDramasUrl}
+            />
+            <Slideshow
+              of="tv"
+              items={slideshowSelector(animeTvShows.data)}
+              icon={<FcFilmReel className="slideshow__type-icon" />}
+              type="Anime"
+              onPopUpOpen={popupTvShows.openPopUp}
+              url={animeTvShowsUrl}
+            />
+            <Slideshow
+              of="tv"
+              items={slideshowSelector(topRatedTvShows.data)}
+              icon={<GiFilmProjector className="slideshow__type-icon" />}
+              type="Top Rated"
+              onPopUpOpen={popupTvShows.openPopUp}
+              url={topRatedTvShowsUrl}
+            />
+          </div>
+        )}
+        {!isSearching && <Footer />}
       </div>
     </>
   );

@@ -1,0 +1,24 @@
+.search {
+  background-color: $background-color;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+
+  &__body {
+    max-width: 120rem;
+    margin: 8rem auto 0rem auto;
+    min-height: calc(100vh - 8rem);
+    padding: 2rem 0rem;
+    font-size: 2rem;
+
+    @include respond(phone-large) {
+      padding: 2rem;
+    }
+  }
+
+  &__results {
+    list-style: none;
+  }
+}

@@ -1,6 +1,6 @@
 .header-loader {
   height: 100vh;
-  background-color: black;
+  background-color: $background-color;
 
   @include respond(laptop-medium) {
     height: 90vh;

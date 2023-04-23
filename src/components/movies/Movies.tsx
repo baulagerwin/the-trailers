@@ -21,12 +21,29 @@ import { animeMoviesUrl, getAnimeMovies } from "./services/getAnimeMovies";
 import { useCallback } from "react";
 import PopUpFilms from "../common/popupFilms/PopUpFilms";
 import useHeaderFilm from "../../hooks/useHeaderFilm";
-import usePopUpFilms from "../../hooks/useQueryPopUpFilms";
+import useQueryPopUpFilms from "../../hooks/useQueryPopUpFilms";
 import MovieDto from "../../dtos/MovieDto";
+import { useSearchParams } from "react-router-dom";
+import Search from "../common/search/Search";
+import useSearchFilm from "../../hooks/useSearchFilm";
+import { getSearchMovies } from "./services/getSearchMovies";
 
 function Movies() {
+  const [searchParams] = useSearchParams();
+  const isSearching = !!searchParams.get("q");
+  const query = searchParams.get("q");
+
   const genres = useMovieGenres();
-  const popUpMovies = usePopUpFilms<MovieDto, IMovie>(
+
+  const searchedMovies = useSearchFilm<MovieDto, IMovie>(
+    query as string,
+    genres,
+    keys.searchedMovies,
+    getSearchMovies,
+    moviesSelector
+  );
+
+  const popUpMovies = useQueryPopUpFilms<MovieDto, IMovie>(
     keys.popupMovies,
     moviesSelector,
     genres
@@ -92,47 +109,50 @@ function Movies() {
           onClose={popUpMovies.closePopUp}
         />
       )}
-      <div className="movies">
+      {isSearching && <Search results={searchedMovies.data} />}
+      <div className={`movies ${isSearching && "u__animation--search-open"}`}>
         <Header
           of="movie"
           item={headerMovie as IHeader}
           onPopUpOpen={popUpMovies.openPopUp}
         />
-        <div className="movies__body">
-          <Slideshow
-            of="movie"
-            items={slideshowSelector(trendingMovies.data)}
-            icon={<FiTrendingUp className="slideshow__type-icon" />}
-            type="Trending"
-            onPopUpOpen={popUpMovies.openPopUp}
-            url={trendingMoviesUrl}
-          />
-          <Slideshow
-            of="movie"
-            items={slideshowSelector(koreanMovies.data)}
-            icon={<FcFilm className="slideshow__type-icon" />}
-            type="K-Movies"
-            onPopUpOpen={popUpMovies.openPopUp}
-            url={koreanMoviesUrl}
-          />
-          <Slideshow
-            of="movie"
-            items={slideshowSelector(animeMovies.data)}
-            icon={<FcFilmReel className="slideshow__type-icon" />}
-            type="Anime"
-            onPopUpOpen={popUpMovies.openPopUp}
-            url={animeMoviesUrl}
-          />
-          <Slideshow
-            of="movie"
-            items={slideshowSelector(topRatedMovies.data)}
-            icon={<GiFilmProjector className="slideshow__type-icon" />}
-            type="Highly Rated"
-            onPopUpOpen={popUpMovies.openPopUp}
-            url={topRatedMoviesUrl}
-          />
-        </div>
-        <Footer />
+        {!isSearching && (
+          <div className="movies__body">
+            <Slideshow
+              of="movie"
+              items={slideshowSelector(trendingMovies.data)}
+              icon={<FiTrendingUp className="slideshow__type-icon" />}
+              type="Trending"
+              onPopUpOpen={popUpMovies.openPopUp}
+              url={trendingMoviesUrl}
+            />
+            <Slideshow
+              of="movie"
+              items={slideshowSelector(koreanMovies.data)}
+              icon={<FcFilm className="slideshow__type-icon" />}
+              type="K-Movies"
+              onPopUpOpen={popUpMovies.openPopUp}
+              url={koreanMoviesUrl}
+            />
+            <Slideshow
+              of="movie"
+              items={slideshowSelector(animeMovies.data)}
+              icon={<FcFilmReel className="slideshow__type-icon" />}
+              type="Anime"
+              onPopUpOpen={popUpMovies.openPopUp}
+              url={animeMoviesUrl}
+            />
+            <Slideshow
+              of="movie"
+              items={slideshowSelector(topRatedMovies.data)}
+              icon={<GiFilmProjector className="slideshow__type-icon" />}
+              type="Highly Rated"
+              onPopUpOpen={popUpMovies.openPopUp}
+              url={topRatedMoviesUrl}
+            />
+          </div>
+        )}
+        {!isSearching && <Footer />}
       </div>
     </>
   );

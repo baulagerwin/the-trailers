@@ -1,11 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FiSearch } from "react-icons/fi";
-import useTransitionAnimation from "../../hooks/useTransitionAnimation";
+import useOverlayTransition from "../../hooks/useOverlayTransition";
 import useDisableMainScrollbar from "../../hooks/useDisableMainScrollbar";
+import useSearch from "../../hooks/useSearch";
 
 function Navbar() {
-  const { status, handleOnOpen, handleOnClose } = useTransitionAnimation();
+  const { pathname } = useLocation();
+  const [search, debouncedSearch, onSearchChange] = useSearch("q", "");
+  const { status, handleOnOpen, handleOnClose } = useOverlayTransition();
   useDisableMainScrollbar(status);
 
   return (
@@ -21,15 +24,27 @@ function Navbar() {
         } ${status === "close" && "u__animation--sidebar-close"}`}
         onClick={(e) => e.stopPropagation()}
       >
-        <Link to="/movies" className="navbar__link" onClick={handleOnClose}>
-          Movies
+        <Link to="/movies" className={`navbar__link`} onClick={handleOnClose}>
+          <span className={`${pathname === "/movies" && "u__active--page"}`}>
+            Movies
+          </span>
         </Link>
-        <Link to="/tv-shows" className="navbar__link" onClick={handleOnClose}>
-          TV Shows
+        <Link to="/tv-shows" className={`navbar__link`} onClick={handleOnClose}>
+          <span className={` ${pathname === "/tv-shows" && "u__active--page"}`}>
+            TV Shows
+          </span>
         </Link>
       </div>
       <div className="navbar__search">
-        <input type="text" className="navbar__input" placeholder="Search" />
+        <input
+          type="text"
+          className="navbar__input"
+          placeholder={`Search for a ${
+            pathname === "/movies" ? "movie" : "tv show"
+          }`}
+          value={search}
+          onChange={onSearchChange}
+        />
         <FiSearch className="navbar__magnifying-glass" />
       </div>
     </div>

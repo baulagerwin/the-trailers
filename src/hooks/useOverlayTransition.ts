@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function useTransitionAnimation() {
+function useOverlayTransition() {
   const [status, setStatus] = useState("");
 
   function handleOnClose() {
@@ -26,4 +26,4 @@ function useTransitionAnimation() {
   return { status, handleOnOpen, handleOnClose };
 }
 
-export default useTransitionAnimation;
+export default useOverlayTransition;
