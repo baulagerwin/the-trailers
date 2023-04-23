@@ -14,7 +14,13 @@ interface IFilm {
 }
 
 function useHeaderFilm<T extends IFilm>(films: T[]) {
-  const [headerFilm, setHeaderMovie] = useState<IHeader>();
+  const [headerFilm, setHeaderMovie] = useState<IHeader>({
+    backgroundImageUrl: "",
+    score: 0,
+    releaseDate: "",
+    title: "",
+    genres: [],
+  });
 
   useEffect(() => {
     if (!!films.length) {
