@@ -15,6 +15,7 @@ export default function useSearchFilm<T, K>(
     queryKey: [key, query],
     queryFn: () => service(query),
     select: (data) => selector(data, genres),
+    cacheTime: 0,
     enabled: !!query,
   });
 

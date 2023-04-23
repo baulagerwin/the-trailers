@@ -12,7 +12,7 @@
 @import "./components/common/slideshow/slideshow";
 @import "./components/common/footer/footer";
 @import "./components/common/popupFilms/popupFilms";
-@import "./components/common/search/search";
+@import "./components/common/searchFilm/searchFilm";
 
 @import "./components/not-found/notFound";
 @import "./components/movies/movies";
@@ -24,3 +24,4 @@
 @import "./components/tv-shows/loader/tvShowsLoader.scss";
 @import "./components/common/footer/loader/footerLoader";
 @import "./components/common/popupFilms/loader/popupFilmsLoader";
+@import "./components/common/searchFilm/loader/searchFilmLoader";

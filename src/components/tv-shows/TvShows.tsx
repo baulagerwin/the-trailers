@@ -24,10 +24,10 @@ import useHeaderFilm from "../../hooks/useHeaderFilm";
 import useQueryPopUpFilms from "../../hooks/useQueryPopUpFilms";
 import PopUpFilms from "../common/popupFilms/PopUpFilms";
 import TvShowDto from "../../dtos/TvShowDto";
-import Search from "../common/search/Search";
 import { useSearchParams } from "react-router-dom";
 import useSearchFilm from "../../hooks/useSearchFilm";
 import { getSearchTvShows } from "./services/getSearchTvShows";
+import SearchFilm from "../common/searchFilm/SearchFilm";
 
 function TvShows() {
   const [searchParams] = useSearchParams();
@@ -111,7 +111,12 @@ function TvShows() {
           onClose={popupTvShows.closePopUp}
         />
       )}
-      {isSearching && <Search results={searchedTvShows.data} />}
+      {isSearching && (
+        <SearchFilm
+          isFetching={searchedTvShows.isFetching}
+          results={searchedTvShows.data}
+        />
+      )}
       <div className={`tv-shows ${isSearching && "u__animation--search-open"}`}>
         <Header
           of="tv"

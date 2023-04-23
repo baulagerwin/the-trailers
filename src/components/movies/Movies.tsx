@@ -24,9 +24,9 @@ import useHeaderFilm from "../../hooks/useHeaderFilm";
 import useQueryPopUpFilms from "../../hooks/useQueryPopUpFilms";
 import MovieDto from "../../dtos/MovieDto";
 import { useSearchParams } from "react-router-dom";
-import Search from "../common/search/Search";
 import useSearchFilm from "../../hooks/useSearchFilm";
 import { getSearchMovies } from "./services/getSearchMovies";
+import SearchFilm from "../common/searchFilm/SearchFilm";
 
 function Movies() {
   const [searchParams] = useSearchParams();
@@ -109,7 +109,12 @@ function Movies() {
           onClose={popUpMovies.closePopUp}
         />
       )}
-      {isSearching && <Search results={searchedMovies.data} />}
+      {isSearching && (
+        <SearchFilm
+          isFetching={searchedMovies.isFetching}
+          results={searchedMovies.data}
+        />
+      )}
       <div className={`movies ${isSearching && "u__animation--search-open"}`}>
         <Header
           of="movie"
