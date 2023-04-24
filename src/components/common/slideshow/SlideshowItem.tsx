@@ -53,7 +53,7 @@ function SlideshowItem({ of, item, onPopUpOpen }: Props) {
           onTouchEnd={handleOnTouchEnd}
         >
           <div className="slideshow__image">
-            <div className="slideshow__cover"></div>
+            <div className="u__overlay--cover"></div>
             <img src={basePosterURL + item.imageUrl} alt="Poster" />
           </div>
           <div className="slideshow__title">{item?.title}</div>
@@ -61,19 +61,6 @@ function SlideshowItem({ of, item, onPopUpOpen }: Props) {
             {getMonthDay(item?.releaseDate as string)}
           </div>
           <div className="slideshow__genre">
-            <div
-              className="slideshow__cover"
-              onMouseUp={(e) => e.stopPropagation()}
-              onClick={(e) =>
-                onPopUpOpen(e, {
-                  name: item.genres[item.genres.length - 1]?.name,
-                  url: getFullUrl(
-                    `/discover/${of}`,
-                    `&with_genres=${item.genres[item.genres.length - 1]?.id}`
-                  ),
-                })
-              }
-            ></div>
             {item.genres[item.genres.length - 1]?.borderColor && (
               <span
                 style={{
@@ -82,6 +69,21 @@ function SlideshowItem({ of, item, onPopUpOpen }: Props) {
                   }`,
                 }}
               >
+                <div
+                  className="u__overlay--cover"
+                  onMouseUp={(e) => e.stopPropagation()}
+                  onClick={(e) =>
+                    onPopUpOpen(e, {
+                      name: item.genres[item.genres.length - 1]?.name,
+                      url: getFullUrl(
+                        `/discover/${of}`,
+                        `&with_genres=${
+                          item.genres[item.genres.length - 1]?.id
+                        }`
+                      ),
+                    })
+                  }
+                ></div>
                 {item.genres[item.genres.length - 1]?.name}
               </span>
             )}

@@ -114,16 +114,6 @@
     }
   }
 
-  &__cover {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: transparent;
-    border-radius: 0.4rem;
-  }
-
   &__title {
     grid-column: 1 / span 2;
     font-family: "Oswald", sans-serif;
@@ -142,9 +132,9 @@
   &__genre {
     height: fit-content;
     user-select: none;
-    position: relative;
 
     span {
+      position: relative;
       font-size: 1.2rem;
       background-color: #333333;
       padding: 0.4rem;

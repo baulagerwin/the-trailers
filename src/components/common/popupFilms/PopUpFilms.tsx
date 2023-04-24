@@ -1,11 +1,10 @@
 import { BsArrowRight } from "react-icons/bs";
 import InfiniteScroll from "react-infinite-scroll-component";
-import basePosterURL from "../../../tmdb/basePosterURL";
-import getMonthDay from "../../../utils/getMonthDay";
 import IGenre from "../../../models/IGenre";
 import useDisableMainScrollbar from "../../../hooks/useDisableMainScrollbar";
 import PopUpFilmsLoader from "./loader/PopUpFilmsLoader";
 import ResultsDto from "../../../dtos/ResultsDto";
+import Poster from "../poster/Poster";
 
 export interface IPopUpCategory {
   name: string;
@@ -79,43 +78,12 @@ function PopUpFilms<T extends IFilm>({
                 scrollableTarget="body"
                 scrollThreshold={0.9}
               >
-                <ul className="popup__items">
+                <ul className="popup__films">
                   <li>
                     {films.results
                       .filter((r) => r.poster_path)
                       .map((film) => (
-                        <div key={film.id} className="popup__item">
-                          <div className="popup__image">
-                            <img
-                              src={basePosterURL + film.poster_path}
-                              alt="Poster"
-                            />
-                          </div>
-                          <div className="popup__title">
-                            {film?.title || film?.name}
-                          </div>
-                          {film?.release_date ? (
-                            <div className="popup__release-date">
-                              {getMonthDay(film?.release_date as string)}
-                            </div>
-                          ) : (
-                            <div className="popup__release-date">
-                              {getMonthDay(film?.first_air_date as string)}
-                            </div>
-                          )}
-                          <div className="popup__genre">
-                            <span
-                              style={{
-                                border: `1px solid ${
-                                  film.genres[film.genres.length - 1]
-                                    ?.borderColor
-                                }`,
-                              }}
-                            >
-                              {film.genres[film.genres.length - 1]?.name}
-                            </span>
-                          </div>
-                        </div>
+                        <Poster key={film.id} item={film} />
                       ))}
                   </li>
                 </ul>

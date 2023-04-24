@@ -1,11 +1,12 @@
+// Global Styles
 @import "./styles/variables";
 @import "./styles/mixins";
-
 @import "./styles/reset";
 @import "./styles/typography";
 @import "./styles/utils";
 @import "./styles/animations";
 
+// Components
 @import "./components/layout/layout";
 @import "./components/navbar/navbar";
 @import "./components/common/header/header";
@@ -13,11 +14,14 @@
 @import "./components/common/footer/footer";
 @import "./components/common/popupFilms/popupFilms";
 @import "./components/common/searchFilm/searchFilm";
+@import "./components/common/poster/poster";
 
+// Pages
 @import "./components/not-found/notFound";
 @import "./components/movies/movies";
 @import "./components/tv-shows/tvShows";
 
+// Loaders
 @import "./components/movies/loader/moviesLoader";
 @import "./components/common/header/loader/headerLoader";
 @import "./components/common/slideshow/loader/slideshowLoader";
@@ -25,3 +29,4 @@
 @import "./components/common/footer/loader/footerLoader";
 @import "./components/common/popupFilms/loader/popupFilmsLoader";
 @import "./components/common/searchFilm/loader/searchFilmLoader";
+@import "./components/common/poster/loader/posterLoader";

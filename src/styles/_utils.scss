@@ -42,3 +42,13 @@
     border-bottom: 0px solid white;
   }
 }
+
+.u__overlay--cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  border-radius: 0.4rem;
+}
