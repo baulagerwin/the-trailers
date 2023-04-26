@@ -4,6 +4,7 @@ import { IHeader } from "../components/common/header/Header";
 import IGenre from "../models/IGenre";
 
 interface IFilm {
+  id: number;
   backdrop_path: string;
   vote_average: number;
   release_date?: string;
@@ -15,11 +16,12 @@ interface IFilm {
 
 function useHeaderFilm<T extends IFilm>(films: T[]) {
   const [headerFilm, setHeaderMovie] = useState<IHeader>({
+    id: 0,
     backgroundImageUrl: "",
     score: 0,
     releaseDate: "",
     title: "",
-    genres: [],
+    genres: [{ id: 0, name: "", borderColor: "" }],
   });
 
   useEffect(() => {
@@ -30,6 +32,7 @@ function useHeaderFilm<T extends IFilm>(films: T[]) {
 
       if (randomFilm.release_date && randomFilm.title) {
         headerFilm = {
+          id: randomFilm.id,
           backgroundImageUrl: randomFilm.backdrop_path,
           score: randomFilm.vote_average,
           releaseDate: randomFilm.release_date,
@@ -41,6 +44,7 @@ function useHeaderFilm<T extends IFilm>(films: T[]) {
 
       if (randomFilm.first_air_date && randomFilm.name) {
         headerFilm = {
+          id: randomFilm.id,
           backgroundImageUrl: randomFilm.backdrop_path,
           score: randomFilm.vote_average,
           releaseDate: randomFilm.first_air_date,

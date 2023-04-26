@@ -80,7 +80,7 @@ function TvShows() {
 
   const headerTvShow = useHeaderFilm<ITvShow>(trendingTvShows.data);
 
-  const slideshowSelector = (tvShows: ITvShow[]) => {
+  const slideshowItemsSelector = (tvShows: ITvShow[]) => {
     return tvShows.map((tvShow) => ({
       id: tvShow.id,
       imageUrl: tvShow.poster_path,
@@ -119,39 +119,44 @@ function TvShows() {
       )}
       <div className={`tv-shows ${isSearching && "u__animation--search-open"}`}>
         <Header
-          of="tv"
+          of="tv-shows"
+          discover="tv"
           item={headerTvShow as IHeader}
           onPopUpOpen={popupTvShows.openPopUp}
         />
         {!isSearching && (
           <div className="tv-shows__body">
             <Slideshow
-              of="tv"
-              items={slideshowSelector(trendingTvShows.data)}
+              of="tv-shows"
+              discover="tv"
+              items={slideshowItemsSelector(trendingTvShows.data)}
               icon={<FiTrendingUp className="slideshow__type-icon" />}
               type="Trending"
               onPopUpOpen={popupTvShows.openPopUp}
               url={trendingTvShowsUrl}
             />
             <Slideshow
-              of="tv"
-              items={slideshowSelector(koreanDramas.data)}
+              of="tv-shows"
+              discover="tv"
+              items={slideshowItemsSelector(koreanDramas.data)}
               icon={<FcFilm className="slideshow__type-icon" />}
               type="K-Drama"
               onPopUpOpen={popupTvShows.openPopUp}
               url={koreanDramasUrl}
             />
             <Slideshow
-              of="tv"
-              items={slideshowSelector(animeTvShows.data)}
+              of="tv-shows"
+              discover="tv"
+              items={slideshowItemsSelector(animeTvShows.data)}
               icon={<FcFilmReel className="slideshow__type-icon" />}
               type="Anime"
               onPopUpOpen={popupTvShows.openPopUp}
               url={animeTvShowsUrl}
             />
             <Slideshow
-              of="tv"
-              items={slideshowSelector(topRatedTvShows.data)}
+              of="tv-shows"
+              discover="tv"
+              items={slideshowItemsSelector(topRatedTvShows.data)}
               icon={<GiFilmProjector className="slideshow__type-icon" />}
               type="Top Rated"
               onPopUpOpen={popupTvShows.openPopUp}

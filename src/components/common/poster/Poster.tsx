@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import IGenre from "../../../models/IGenre";
 import basePosterURL from "../../../tmdb/basePosterURL";
 import getMonthDay from "../../../utils/getMonthDay";
@@ -20,19 +21,24 @@ function Poster({ item }: Props) {
   let lastGenre = item.genres[item.genres.length - 1];
 
   return (
-    <div className="poster">
+    <Link
+      to={`${
+        item?.release_date ? `/movies/${item.id}` : `/tv-shows/${item.id}`
+      }`}
+      className="poster"
+    >
       <div className="poster__image">
         <img src={basePosterURL + item.poster_path} alt="Poster" />
       </div>
       <div className="poster__title">{item?.title || item?.name}</div>
       {item?.release_date ? (
-        <div className="poster__release-date">
+        <span className="poster__release-date">
           {getMonthDay(item?.release_date as string)}
-        </div>
+        </span>
       ) : (
-        <div className="poster__release-date">
+        <span className="poster__release-date">
           {getMonthDay(item?.first_air_date as string)}
-        </div>
+        </span>
       )}
       <div className="poster__genre">
         {lastGenre?.borderColor && (
@@ -45,7 +51,7 @@ function Poster({ item }: Props) {
           </span>
         )}
       </div>
-    </div>
+    </Link>
   );
 }
 

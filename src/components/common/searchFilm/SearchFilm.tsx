@@ -1,6 +1,4 @@
 import IGenre from "../../../models/IGenre";
-import basePosterURL from "../../../tmdb/basePosterURL";
-import getMonthDay from "../../../utils/getMonthDay";
 import Footer from "../footer/Footer";
 import Poster from "../poster/Poster";
 import SearchFilmLoader from "./loader/SearchFilmLoader";

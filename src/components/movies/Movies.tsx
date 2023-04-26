@@ -78,7 +78,7 @@ function Movies() {
   );
   const headerMovie = useHeaderFilm<IMovie>(trendingMovies.data);
 
-  const slideshowSelector = useCallback((movies: IMovie[]) => {
+  const slideshowItemsSelector = useCallback((movies: IMovie[]) => {
     return movies.map((movie) => ({
       id: movie.id,
       imageUrl: movie.poster_path,
@@ -117,39 +117,44 @@ function Movies() {
       )}
       <div className={`movies ${isSearching && "u__animation--search-open"}`}>
         <Header
-          of="movie"
+          of="movies"
+          discover="movie"
           item={headerMovie as IHeader}
           onPopUpOpen={popUpMovies.openPopUp}
         />
         {!isSearching && (
           <div className="movies__body">
             <Slideshow
-              of="movie"
-              items={slideshowSelector(trendingMovies.data)}
+              of="movies"
+              discover="movie"
+              items={slideshowItemsSelector(trendingMovies.data)}
               icon={<FiTrendingUp className="slideshow__type-icon" />}
               type="Trending"
               onPopUpOpen={popUpMovies.openPopUp}
               url={trendingMoviesUrl}
             />
             <Slideshow
-              of="movie"
-              items={slideshowSelector(koreanMovies.data)}
+              of="movies"
+              discover="movie"
+              items={slideshowItemsSelector(koreanMovies.data)}
               icon={<FcFilm className="slideshow__type-icon" />}
               type="K-Movies"
               onPopUpOpen={popUpMovies.openPopUp}
               url={koreanMoviesUrl}
             />
             <Slideshow
-              of="movie"
-              items={slideshowSelector(animeMovies.data)}
+              of="movies"
+              discover="movie"
+              items={slideshowItemsSelector(animeMovies.data)}
               icon={<FcFilmReel className="slideshow__type-icon" />}
               type="Anime"
               onPopUpOpen={popUpMovies.openPopUp}
               url={animeMoviesUrl}
             />
             <Slideshow
-              of="movie"
-              items={slideshowSelector(topRatedMovies.data)}
+              of="movies"
+              discover="movie"
+              items={slideshowItemsSelector(topRatedMovies.data)}
               icon={<GiFilmProjector className="slideshow__type-icon" />}
               type="Highly Rated"
               onPopUpOpen={popUpMovies.openPopUp}

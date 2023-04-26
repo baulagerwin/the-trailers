@@ -16,11 +16,12 @@ export interface ISlideshowItem {
 
 interface Props {
   of: string;
+  discover: string;
   item: ISlideshowItem;
   onPopUpOpen: (e: React.MouseEvent, data: IPopUpCategory) => void;
 }
 
-function SlideshowItem({ of, item, onPopUpOpen }: Props) {
+function SlideshowItem({ of, discover, item, onPopUpOpen }: Props) {
   const navigate = useNavigate();
   const [startX, setStartX] = useState(0);
 
@@ -30,7 +31,7 @@ function SlideshowItem({ of, item, onPopUpOpen }: Props) {
 
   function handleOnMouseUp(e: React.MouseEvent) {
     if (startX !== e.nativeEvent.pageX) return;
-    navigate(`/movies`);
+    navigate(`/${of}/${item.id}`);
   }
 
   function handleOnTouchStart(e: React.TouchEvent) {
@@ -39,7 +40,7 @@ function SlideshowItem({ of, item, onPopUpOpen }: Props) {
 
   function handleOnTouchEnd(e: React.TouchEvent) {
     if (startX !== e.touches[0]?.clientX) return;
-    navigate(`/movies`);
+    navigate(`/${of}/${item.id}`);
   }
 
   return (
@@ -76,7 +77,7 @@ function SlideshowItem({ of, item, onPopUpOpen }: Props) {
                     onPopUpOpen(e, {
                       name: item.genres[item.genres.length - 1]?.name,
                       url: getFullUrl(
-                        `/discover/${of}`,
+                        `/discover/${discover}`,
                         `&with_genres=${
                           item.genres[item.genres.length - 1]?.id
                         }`

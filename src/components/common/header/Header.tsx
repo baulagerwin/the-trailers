@@ -6,6 +6,7 @@ import getFullUrl from "../../../tmdb/getFullUrl";
 import { IPopUpCategory } from "../popupFilms/PopUpFilms";
 
 export interface IHeader {
+  id: number;
   backgroundImageUrl: string;
   score: number;
   releaseDate: string;
@@ -15,11 +16,12 @@ export interface IHeader {
 
 interface Props {
   of: string;
+  discover: string;
   item: IHeader;
   onPopUpOpen: (e: React.MouseEvent, data: IPopUpCategory) => void;
 }
 
-function Header({ of, item, onPopUpOpen }: Props) {
+function Header({ of, discover, item, onPopUpOpen }: Props) {
   return (
     <header
       className="header"
@@ -27,7 +29,7 @@ function Header({ of, item, onPopUpOpen }: Props) {
         backgroundImage: `linear-gradient(
             to bottom,
             rgba(0, 0, 0, 0.8),
-            rgba(0, 0, 0, 0.3),
+            rgba(0, 0, 0, 0.2),
             rgba(5, 22, 30, 0.6),
             rgba(5, 22, 30, 1)
           ), url(${item && baseBackDropURL + item.backgroundImageUrl})`,
@@ -48,37 +50,35 @@ function Header({ of, item, onPopUpOpen }: Props) {
             </div>
           )}
           {!!item?.title && (
-            <Link to="/" className="header__movie-title">
+            <Link to={`/${of}/${item.id}`} className="header__movie-title">
               {item?.title}
             </Link>
           )}
-          {!!item.genres.length && (
-            <div className="header__movie-genres">
-              {item?.genres.map((genre) => (
-                <div key={genre.id}>
-                  {genre.borderColor && (
-                    <span
-                      className="header__movie-genre"
-                      style={{
-                        border: `1px solid ${genre.borderColor}`,
-                      }}
-                      onClick={(e) =>
-                        onPopUpOpen(e, {
-                          name: genre.name,
-                          url: getFullUrl(
-                            `/discover/${of}`,
-                            `&with_genres=${genre.id}`
-                          ),
-                        })
-                      }
-                    >
-                      {genre.name}
-                    </span>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
+          <div className="header__movie-genres">
+            {item?.genres.map((genre) => (
+              <div key={genre.id}>
+                {!!genre.id && (
+                  <span
+                    className="header__movie-genre"
+                    style={{
+                      border: `1px solid ${genre.borderColor}`,
+                    }}
+                    onClick={(e) =>
+                      onPopUpOpen(e, {
+                        name: genre.name,
+                        url: getFullUrl(
+                          `/discover/${discover}`,
+                          `&with_genres=${genre.id}`
+                        ),
+                      })
+                    }
+                  >
+                    {genre.name}
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </header>

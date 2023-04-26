@@ -4,6 +4,7 @@ import { IPopUpCategory } from "../popupFilms/PopUpFilms";
 
 interface Props {
   of: string;
+  discover: string;
   icon: React.ReactNode;
   type: string;
   items: ISlideshowItem[];
@@ -11,7 +12,15 @@ interface Props {
   url: string;
 }
 
-function Slideshow({ of, icon, type, items, onPopUpOpen, url }: Props) {
+function Slideshow({
+  of,
+  discover,
+  icon,
+  type,
+  items,
+  onPopUpOpen,
+  url,
+}: Props) {
   const itemRef = useRef<HTMLDivElement>(null);
 
   const [isDown, setIsDown] = useState<boolean>(false);
@@ -134,6 +143,7 @@ function Slideshow({ of, icon, type, items, onPopUpOpen, url }: Props) {
             <SlideshowItem
               key={item.id}
               of={of}
+              discover={discover}
               item={item}
               onPopUpOpen={onPopUpOpen}
             />

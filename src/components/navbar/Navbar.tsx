@@ -25,12 +25,14 @@ function Navbar() {
         onClick={(e) => e.stopPropagation()}
       >
         <Link to="/movies" className={`navbar__link`} onClick={handleOnClose}>
-          <span className={`${pathname === "/movies" && "u__active--page"}`}>
+          <span className={`${pathname.match(/movies/) && "u__active--page"}`}>
             Movies
           </span>
         </Link>
         <Link to="/tv-shows" className={`navbar__link`} onClick={handleOnClose}>
-          <span className={` ${pathname === "/tv-shows" && "u__active--page"}`}>
+          <span
+            className={` ${pathname.match(/tv-shows/) && "u__active--page"}`}
+          >
             TV Shows
           </span>
         </Link>
@@ -40,7 +42,7 @@ function Navbar() {
           type="text"
           className="navbar__input"
           placeholder={`Search for a ${
-            pathname === "/movies" ? "movie" : "tv show"
+            pathname.match(/(movies)/) ? "movie" : "tv show"
           }`}
           value={search}
           onChange={onSearchChange}
