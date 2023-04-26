@@ -25,7 +25,7 @@
     overflow: hidden;
 
     @include respond(phone-large) {
-      height: 32rem;
+      height: 30rem;
     }
 
     img {
