@@ -27,7 +27,7 @@
     }
 
     @include respond(phone-medium) {
-      margin-bottom: -1rem;
+      margin-bottom: -0.4rem;
     }
   }
 
@@ -38,11 +38,11 @@
     color: yellow;
 
     @include respond(tablet) {
-      transform: translateY(-0.2rem);
+      transform: translateY(-0.3rem);
     }
 
     @include respond(phone-large) {
-      transform: translateY(-0.3rem);
+      transform: translateY(-0.4rem);
     }
   }
 
