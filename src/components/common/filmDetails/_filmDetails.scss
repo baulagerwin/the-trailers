@@ -47,6 +47,10 @@
     @include respond(tablet) {
       font-size: 4rem;
     }
+
+    @include respond(phone-large) {
+      font-size: 3rem;
+    }
   }
 
   &__buttons {
