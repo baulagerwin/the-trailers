@@ -9,12 +9,15 @@
 // Components
 @import "./components/layout/layout";
 @import "./components/navbar/navbar";
-@import "./components/common/header/header";
+@import "./components/common/headerFilm/headerFilm";
 @import "./components/common/slideshow/slideshow";
 @import "./components/common/footer/footer";
 @import "./components/common/popupFilms/popupFilms";
 @import "./components/common/searchFilm/searchFilm";
 @import "./components/common/poster/poster";
+@import "./components/common/backgroundFilm/backgroundFilm";
+@import "./components/common/genreButton/genreButton";
+@import "./components/common/filmDetails/filmDetails";
 
 // Pages
 @import "./components/not-found/notFound";
@@ -25,7 +28,7 @@
 
 // Loaders
 @import "./components/movies/loader/moviesLoader";
-@import "./components/common/header/loader/headerLoader";
+@import "./components/common/headerFilm/loader/headerFilmLoader";
 @import "./components/common/slideshow/loader/slideshowLoader";
 @import "./components/tv-shows/loader/tvShowsLoader.scss";
 @import "./components/common/footer/loader/footerLoader";

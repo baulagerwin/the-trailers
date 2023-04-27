@@ -1,11 +1,11 @@
 import FooterLoader from "../../common/footer/loader/FooterLoader";
-import HeaderLoader from "../../common/header/loader/HeaderLoader";
+import HeaderFilmLoader from "../../common/headerFilm/loader/HeaderFilmLoader";
 import SlideshowLoader from "../../common/slideshow/loader/SlideshowLoader";
 
 function MoviesLoader() {
   return (
     <div className="movies-loader">
-      <HeaderLoader />
+      <HeaderFilmLoader />
       <div className="movies-loader__body">
         <SlideshowLoader />
         <SlideshowLoader />

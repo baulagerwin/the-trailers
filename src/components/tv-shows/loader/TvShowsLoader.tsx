@@ -1,10 +1,10 @@
-import HeaderLoader from "../../common/header/loader/HeaderLoader";
+import HeaderFilmLoader from "../../common/headerFilm/loader/HeaderFilmLoader";
 import SlideshowLoader from "../../common/slideshow/loader/SlideshowLoader";
 
 function TvShowsLoader() {
   return (
     <div className="tv-shows-loader">
-      <HeaderLoader />
+      <HeaderFilmLoader />
       <div className="tv-shows-loader__body">
         <SlideshowLoader />
         <SlideshowLoader />

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import getRandomNumber from "../utils/getRandomBetween";
-import { IHeader } from "../components/common/header/Header";
 import IGenre from "../models/IGenre";
+import { IHeaderFilm } from "../components/common/headerFilm/HeaderFilm";
 
 interface IFilm {
   id: number;
@@ -15,20 +15,20 @@ interface IFilm {
 }
 
 function useHeaderFilm<T extends IFilm>(films: T[]) {
-  const [headerFilm, setHeaderMovie] = useState<IHeader>({
+  const [headerFilm, setHeaderMovie] = useState<IHeaderFilm>({
     id: 0,
     backgroundImageUrl: "",
     score: 0,
     releaseDate: "",
     title: "",
-    genres: [{ id: 0, name: "", borderColor: "" }],
+    genres: [],
   });
 
   useEffect(() => {
     if (!!films.length) {
       const index = getRandomNumber(0, 19);
       const randomFilm = films[index];
-      let headerFilm: IHeader;
+      let headerFilm: IHeaderFilm;
 
       if (randomFilm.release_date && randomFilm.title) {
         headerFilm = {

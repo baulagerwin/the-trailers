@@ -13,6 +13,14 @@ const keys = {
   popupTvShows: "popupTvShows",
   searchedMovies: "searchedMovies",
   searchedTvShows: "searchedTvShows",
+  movie: "movie",
+  tvShow: "tvShow",
+  movieCasts: "movieCasts",
+  tvShowCasts: "tvShowCasts",
+  moviePosters: "moviePosters",
+  tvShowPosters: "tvShowPosters",
+  movieVideos: "movieVideos",
+  tvShowVideos: "tvShowVideos",
 };
 
 export default keys;

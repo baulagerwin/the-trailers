@@ -1,0 +1,17 @@
+.background-film {
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+
+  @include respond(laptop-medium) {
+    height: 90vh;
+  }
+
+  @include respond(tablet) {
+    height: 80vh;
+  }
+
+  @include respond(phone-large) {
+    height: 60vh;
+  }
+}

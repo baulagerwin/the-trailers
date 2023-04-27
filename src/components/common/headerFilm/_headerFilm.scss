@@ -1,21 +1,5 @@
-.header {
-  background-position: center;
-  background-size: cover;
-  height: 100vh;
-
-  @include respond(laptop-medium) {
-    height: 90vh;
-  }
-
-  @include respond(tablet) {
-    height: 80vh;
-  }
-
-  @include respond(phone-large) {
-    height: 60vh;
-  }
-
-  &__movie-details {
+.header-film {
+  &__details {
     max-width: 120rem;
     margin: 0 auto;
     height: inherit;
@@ -27,7 +11,7 @@
     }
   }
 
-  &__movie-data {
+  &__data {
     display: flex;
     align-items: center;
     gap: 0.4rem;
@@ -47,7 +31,7 @@
     }
   }
 
-  &__movie-star {
+  &__star {
     font-size: 2rem;
     display: inline;
     transform: translateY(-0.15rem);
@@ -62,7 +46,7 @@
     }
   }
 
-  &__movie-texts {
+  &__texts {
     height: 24rem;
     width: 100%;
 
@@ -75,7 +59,7 @@
     }
   }
 
-  &__movie-title {
+  &__title {
     text-transform: uppercase;
     font-family: "Oswald", sans-serif;
     font-size: 5rem;
@@ -93,26 +77,10 @@
     }
   }
 
-  &__movie-genres {
+  &__genres {
     display: flex;
     justify-content: stretch;
     gap: 0.6rem;
     margin-top: 0.4rem;
-  }
-
-  &__movie-genre {
-    font-weight: 400;
-    background-color: #333333;
-    padding: 0.4rem 0.8rem;
-    border-radius: 0.6rem;
-    border: 1px solid $text-color;
-    font-size: 1.4rem;
-
-    cursor: pointer;
-
-    @include respond(phone-large) {
-      font-size: 1.2rem;
-      padding: 0.6rem;
-    }
   }
 }

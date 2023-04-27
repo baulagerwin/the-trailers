@@ -1,0 +1,94 @@
+.film-details {
+  transform: translateY(-24rem);
+
+  @include respond(laptop-medium) {
+    transform: translateY(-20rem);
+  }
+
+  @include respond(tablet) {
+    transform: translateY(-16rem);
+  }
+
+  @include respond(phone-large) {
+    transform: translateY(-12rem);
+  }
+
+  color: $text-color;
+  max-width: 120rem;
+  margin: 0 auto;
+
+  @include respond(laptop-medium) {
+    padding: 0rem 2rem;
+  }
+
+  &__tagline {
+    font-size: 1.8rem;
+    font-style: italic;
+    font-weight: 300;
+
+    &::before {
+      content: "“";
+      margin-right: 0.3rem;
+    }
+    &::after {
+      content: "”";
+      margin-left: 0.3rem;
+    }
+  }
+
+  &__title {
+    text-transform: uppercase;
+    font-family: "Oswald", sans-serif;
+    font-size: 5rem;
+    letter-spacing: -0.2rem;
+    font-weight: 500;
+    line-height: 4.2rem;
+
+    @include respond(tablet) {
+      font-size: 4rem;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transform: translateY(1rem);
+    margin-bottom: 2rem;
+  }
+
+  &__genres {
+    display: flex;
+    justify-content: stretch;
+    gap: 0.6rem;
+    margin-top: 0.4rem;
+  }
+
+  &__genre {
+    font-weight: 400;
+    background-color: #333;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.6rem;
+    border: 1px solid $text-color;
+    font-size: 1.4rem;
+
+    cursor: pointer;
+
+    @include respond(phone-large) {
+      font-size: 1.2rem;
+      padding: 0.6rem;
+    }
+  }
+
+  &__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $text-color;
+    color: #333;
+    height: 4rem;
+    width: 5rem;
+    font-size: 2.4rem;
+    border-radius: 1rem;
+  }
+}

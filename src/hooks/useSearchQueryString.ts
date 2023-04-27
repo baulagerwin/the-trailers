@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "./useDebounce";
 
-function useSearch(
+function useSearchQueryString(
   key: string,
   initialSearch: string
 ): [string, string, (e: React.ChangeEvent<HTMLInputElement>) => void] {
@@ -25,4 +25,4 @@ function useSearch(
   return [search, debouncedSearch, handleSearchChange];
 }
 
-export default useSearch;
+export default useSearchQueryString;

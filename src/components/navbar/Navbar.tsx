@@ -3,11 +3,14 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { FiSearch } from "react-icons/fi";
 import useOverlayTransition from "../../hooks/useOverlayTransition";
 import useDisableMainScrollbar from "../../hooks/useDisableMainScrollbar";
-import useSearch from "../../hooks/useSearch";
+import useSearchQueryString from "../../hooks/useSearchQueryString";
 
 function Navbar() {
   const { pathname } = useLocation();
-  const [search, debouncedSearch, onSearchChange] = useSearch("q", "");
+  const [search, debouncedSearch, onSearchChange] = useSearchQueryString(
+    "q",
+    ""
+  );
   const { status, handleOnOpen, handleOnClose } = useOverlayTransition();
   useDisableMainScrollbar(status);
 
@@ -25,13 +28,15 @@ function Navbar() {
         onClick={(e) => e.stopPropagation()}
       >
         <Link to="/movies" className={`navbar__link`} onClick={handleOnClose}>
-          <span className={`${pathname.match(/movies/) && "u__active--page"}`}>
+          <span
+            className={`${pathname.match(/\/movies$/) && "u__active--page"}`}
+          >
             Movies
           </span>
         </Link>
         <Link to="/tv-shows" className={`navbar__link`} onClick={handleOnClose}>
           <span
-            className={` ${pathname.match(/tv-shows/) && "u__active--page"}`}
+            className={` ${pathname.match(/\/tv-shows$/) && "u__active--page"}`}
           >
             TV Shows
           </span>

@@ -5,6 +5,7 @@ import { useState } from "react";
 import IGenre from "../../../models/IGenre";
 import getFullUrl from "../../../tmdb/getFullUrl";
 import { IPopUpCategory } from "../popupFilms/PopUpFilms";
+import GenreButton from "../genreButton/GenreButton";
 
 export interface ISlideshowItem {
   id: number;
@@ -63,13 +64,7 @@ function SlideshowItem({ of, discover, item, onPopUpOpen }: Props) {
           </div>
           <div className="slideshow__genre">
             {item.genres[item.genres.length - 1]?.borderColor && (
-              <span
-                style={{
-                  border: `1px solid ${
-                    item.genres[item.genres.length - 1]?.borderColor
-                  }`,
-                }}
-              >
+              <GenreButton genre={item.genres[item.genres.length - 1]}>
                 <div
                   className="u__overlay--cover"
                   onMouseUp={(e) => e.stopPropagation()}
@@ -84,9 +79,8 @@ function SlideshowItem({ of, discover, item, onPopUpOpen }: Props) {
                       ),
                     })
                   }
-                ></div>
-                {item.genres[item.genres.length - 1]?.name}
-              </span>
+                />
+              </GenreButton>
             )}
           </div>
         </div>

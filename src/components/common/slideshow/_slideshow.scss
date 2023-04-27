@@ -132,15 +132,5 @@
   &__genre {
     height: fit-content;
     user-select: none;
-
-    span {
-      position: relative;
-      font-size: 1.2rem;
-      background-color: #333333;
-      padding: 0.4rem;
-      border-radius: 0.6rem;
-      // border: 1px solid $text-color;
-      display: inline-block;
-    }
   }
 }
