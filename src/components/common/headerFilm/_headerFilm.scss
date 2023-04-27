@@ -71,16 +71,12 @@
     @include respond(tablet) {
       font-size: 4rem;
     }
-
-    @include respond(phone-large) {
-      font-size: 3rem;
-    }
   }
 
   &__genres {
     display: flex;
-    justify-content: stretch;
     gap: 0.6rem;
+    flex-wrap: wrap;
     margin-top: 0.4rem;
   }
 }
