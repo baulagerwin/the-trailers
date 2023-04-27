@@ -34,6 +34,10 @@
       content: "”";
       margin-left: 0.3rem;
     }
+
+    @include respond(phone-large) {
+      font-size: 1.6rem;
+    }
   }
 
   &__title {
@@ -50,6 +54,7 @@
 
     @include respond(phone-large) {
       font-size: 3rem;
+      margin-top: -0.6rem;
     }
   }
 
@@ -59,6 +64,11 @@
     align-items: center;
     transform: translateY(1rem);
     margin-bottom: 2rem;
+
+    @include respond(phone-large) {
+      transform: translateY(-0.4rem);
+      margin-bottom: 0.8rem;
+    }
   }
 
   &__genres {

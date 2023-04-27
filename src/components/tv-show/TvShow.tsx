@@ -10,9 +10,26 @@ import BackgroundFilm from "../common/backgroundFilm/BackgroundFilm";
 import Footer from "../common/footer/Footer";
 import FilmDetails from "../common/filmDetails/FilmDetails";
 import ITvShowDetails from "../../models/ITvShowDetails";
+import useQueryGenres from "../../hooks/useQueryGenres";
+import getTvShowGenres from "../tv-shows/services/getTvShowGenres";
+import useSearchFilm from "../../hooks/useSearchFilm";
+import TvShowDto from "../../dtos/TvShowDto";
+import ITvShow from "../../models/ITvShow";
+import { getSearchTvShows } from "../tv-shows/services/getSearchTvShows";
+import { tvShowsSelector } from "../../react-query/selectors";
+import SearchFilm from "../common/searchFilm/SearchFilm";
 
 function TvShow() {
   const { tvShowId } = useParams();
+
+  const genres = useQueryGenres(keys.tvShowGenres, getTvShowGenres);
+
+  const searched = useSearchFilm<TvShowDto, ITvShow>(
+    genres,
+    keys.searchedMovies,
+    getSearchTvShows,
+    tvShowsSelector
+  );
 
   const tvShow = useQuery({
     queryKey: [keys.tvShow, tvShowId],
@@ -24,21 +41,25 @@ function TvShow() {
         borderColor: getRandomColor(),
       })),
     }),
+    cacheTime: 0,
   });
 
   const casts = useQuery({
     queryKey: [keys.movieCasts, tvShowId],
     queryFn: () => getTvShowCasts(tvShowId as string),
+    cacheTime: 0,
   });
 
   const posters = useQuery({
     queryKey: [keys.moviePosters, tvShowId],
     queryFn: () => getTvShowPosters(tvShowId as string),
+    cacheTime: 0,
   });
 
   const videos = useQuery({
     queryKey: [keys.movieVideos, tvShowId],
     queryFn: () => getTvShowVideos(tvShowId as string),
+    cacheTime: 0,
   });
 
   if (
@@ -52,16 +73,25 @@ function TvShow() {
   console.log(tvShow.data);
 
   return (
-    <div className="tv-show">
-      <BackgroundFilm
-        backgroundImageUrl={tvShow.data?.backdrop_path as string}
-        children={null}
-      />
-      <div className="tv-show__body">
-        <FilmDetails film={tvShow.data as ITvShowDetails} />
+    <>
+      {searched.isSearching && (
+        <SearchFilm isFetching={searched.isFetching} results={searched.data} />
+      )}
+      <div
+        className={`tv-show ${
+          searched.isSearching && "u__animation--search-open"
+        }`}
+      >
+        <BackgroundFilm
+          backgroundImageUrl={tvShow.data?.backdrop_path as string}
+          children={null}
+        />
+        <div className="tv-show__body">
+          <FilmDetails film={tvShow.data as ITvShowDetails} />
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   );
 }
 
