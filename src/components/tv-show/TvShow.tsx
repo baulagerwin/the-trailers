@@ -18,6 +18,8 @@ import ITvShow from "../../models/ITvShow";
 import { getSearchTvShows } from "../tv-shows/services/getSearchTvShows";
 import { tvShowsSelector } from "../../react-query/selectors";
 import SearchFilm from "../common/searchFilm/SearchFilm";
+import ICast from "../../models/ICast";
+import ICrew from "../../models/ICrew";
 
 function TvShow() {
   const { tvShowId } = useParams();
@@ -70,7 +72,7 @@ function TvShow() {
   )
     return <div>Loading...</div>;
 
-  console.log(tvShow.data);
+  console.log(casts.data);
 
   return (
     <>
@@ -87,7 +89,11 @@ function TvShow() {
           children={null}
         />
         <div className="tv-show__body">
-          <FilmDetails film={tvShow.data as ITvShowDetails} />
+          <FilmDetails
+            film={tvShow.data as ITvShowDetails}
+            casts={casts.data?.cast as ICast[]}
+            crews={casts.data?.crew as ICrew[]}
+          />
         </div>
         <Footer />
       </div>

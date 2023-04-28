@@ -69,19 +69,11 @@
     font-size: 2.2rem;
   }
 
-  &__window {
-    overflow-x: hidden;
-  }
-
   &__items {
     list-style: none;
     display: flex;
     gap: 2.4rem;
     width: fit-content;
-
-    @include respond(phone-large) {
-      margin: 0rem 2rem 0rem 0rem;
-    }
   }
 
   &__item {

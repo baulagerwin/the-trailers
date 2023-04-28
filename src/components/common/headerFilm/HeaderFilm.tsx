@@ -40,8 +40,8 @@ function HeaderFilm({ of, discover, item, onPopUpOpen }: Props) {
             </div>
           )}
           {!!item?.title && (
-            <Link to={`/${of}/${item.id}`} className="header-film__title">
-              {item?.title}
+            <Link to={`/${of}/${item.id}`}>
+              <h1>{item?.title}</h1>
             </Link>
           )}
           {!!item?.genres.length && (

@@ -7,10 +7,29 @@ body {
   color: $text-color;
 }
 
+h1 {
+  text-transform: uppercase;
+  font-family: "Oswald", sans-serif;
+  font-size: 5rem;
+  letter-spacing: -0.2rem;
+  font-weight: 500;
+  // display: block;
+  line-height: 4.2rem;
+
+  @include respond(tablet) {
+    font-size: 4rem;
+  }
+
+  @include respond(phone-large) {
+    font-size: 3rem;
+  }
+}
+
 h2 {
   font-size: 3rem;
 }
 
+// Footer Logo
 h3 {
   font-family: "Oswald", sans-serif;
   font-size: 4rem;
@@ -19,6 +38,7 @@ h3 {
   text-transform: uppercase;
 }
 
+// Navbar Logo
 h4 {
   font-family: "Oswald", sans-serif;
   font-size: 3rem;
@@ -28,7 +48,8 @@ h4 {
 }
 
 h5 {
-  font-size: 2.8rem;
-  letter-spacing: -0.1rem;
-  font-weight: 600;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: rgba($color: #fff, $alpha: 0.4);
+  margin-bottom: 0.4rem;
 }

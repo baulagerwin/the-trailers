@@ -59,28 +59,18 @@
     }
   }
 
-  &__title {
-    text-transform: uppercase;
-    font-family: "Oswald", sans-serif;
-    font-size: 5rem;
-    letter-spacing: -0.2rem;
-    font-weight: 500;
-    // display: block;
-    line-height: 4.2rem;
-
-    @include respond(tablet) {
-      font-size: 4rem;
-    }
-
-    @include respond(phone-large) {
-      font-size: 3rem;
-    }
-  }
-
   &__genres {
     display: flex;
     gap: 0.6rem;
     flex-wrap: wrap;
-    margin-top: 0.4rem;
+    margin-top: 1.2rem;
+
+    @include respond(tablet) {
+      margin-top: 0.6rem;
+    }
+
+    @include respond(phone-large) {
+      margin-top: 0rem;
+    }
   }
 }

@@ -6,7 +6,7 @@ const today = new Date();
 const formattedDate = today.toISOString().slice(0, 10);
 
 const url = "/discover/movie";
-const queryString = `&language=en-US&region=KR&sort_by=popularity.desc&with_original_language=ko&certification_country=KR&certification.lte=18&include_adult=false&without_genres=99&release_date.lte=${formattedDate}`;
+const queryString = `&language=en-US&region=KR&sort_by=popularity.desc&with_original_language=ko&certification_country=KR&certification.lte=12&include_adult=false&without_genres=99&release_date.lte=${formattedDate}`;
 
 export const koreanMoviesUrl = getFullUrl(url, queryString);
 

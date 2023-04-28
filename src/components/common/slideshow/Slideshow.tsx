@@ -1,6 +1,8 @@
-import { useEffect, useRef, useState } from "react";
 import SlideshowItem, { ISlideshowItem } from "./SlideshowItem";
 import { IPopUpCategory } from "../popupFilms/PopUpFilms";
+import Swiper from "../swiper/Swiper";
+import { useNavigate } from "react-router-dom";
+import SwiperItem from "../swiper/SwiperItem";
 
 interface Props {
   of: string;
@@ -21,93 +23,7 @@ function Slideshow({
   onPopUpOpen,
   url,
 }: Props) {
-  const itemRef = useRef<HTMLDivElement>(null);
-
-  const [isDown, setIsDown] = useState<boolean>(false);
-  const [startX, setStartX] = useState<number>(0);
-  const [position, setPosition] = useState<number>(0);
-
-  useEffect(() => {
-    if (!itemRef.current) return;
-
-    itemRef.current.scroll(position, 0);
-  }, [position]);
-
-  function handleOnMouseDown(e: React.MouseEvent) {
-    e.stopPropagation();
-    setIsDown(true);
-    setStartX(e.nativeEvent.pageX + position);
-  }
-
-  function handleOnMouseMove(e: React.MouseEvent) {
-    e.stopPropagation();
-
-    if (!isDown) return;
-    if (!itemRef.current) return;
-
-    let maxScrollX = itemRef.current.scrollWidth - itemRef.current.clientWidth;
-    let offsetX = e.nativeEvent.pageX;
-    let diff = startX - offsetX;
-    let scrollX = diff;
-
-    if (scrollX < 0) {
-      setPosition(0);
-      return;
-    }
-
-    if (scrollX >= maxScrollX) {
-      setPosition(maxScrollX);
-      return;
-    }
-
-    setPosition(scrollX);
-  }
-
-  function handleOnMouseUp(e: React.MouseEvent) {
-    e.stopPropagation();
-    setIsDown(false);
-    setStartX(0);
-  }
-
-  function handleOnMouseLeave(e: React.MouseEvent) {
-    e.stopPropagation();
-    setIsDown(false);
-    setStartX(0);
-  }
-
-  function handleOnTouchStart(e: React.TouchEvent) {
-    e.stopPropagation();
-    setIsDown(true);
-    setStartX(e.touches[0].clientX + position);
-  }
-
-  function handleOnTouchMove(e: React.TouchEvent) {
-    if (!isDown) return;
-    if (!itemRef.current) return;
-
-    let maxScrollX = itemRef.current.scrollWidth - itemRef.current.clientWidth;
-    let offsetX = e.touches[0].clientX;
-    let diff = startX - offsetX;
-    let scrollX = diff;
-
-    if (scrollX < 0) {
-      setPosition(0);
-      return;
-    }
-
-    if (scrollX >= maxScrollX) {
-      setPosition(maxScrollX);
-      return;
-    }
-
-    setPosition(scrollX);
-  }
-
-  function handleOnTouchEnd(e: React.TouchEvent) {
-    e.stopPropagation();
-    setIsDown(false);
-    setStartX(0);
-  }
+  const navigate = useNavigate();
 
   return (
     <div className="slideshow">
@@ -123,33 +39,28 @@ function Slideshow({
             onClick={(e) => onPopUpOpen(e, { name: type, url })}
           >
             <span>See more</span>
-            {/* <IoIosArrowRoundForward className="slideshow__type-arrow" /> */}
           </button>
         </div>
       </div>
-      <div
-        ref={itemRef}
-        className="slideshow__window"
-        onMouseDown={handleOnMouseDown}
-        onMouseMove={handleOnMouseMove}
-        onMouseUp={handleOnMouseUp}
-        onMouseLeave={handleOnMouseLeave}
-        onTouchStart={handleOnTouchStart}
-        onTouchMove={handleOnTouchMove}
-        onTouchEnd={handleOnTouchEnd}
-      >
+      <Swiper>
         <ul className="slideshow__items">
-          {items?.map((item) => (
-            <SlideshowItem
-              key={item.id}
-              of={of}
-              discover={discover}
-              item={item}
-              onPopUpOpen={onPopUpOpen}
-            />
-          ))}
+          {items?.map((item) => {
+            const whenClick = () => {
+              navigate(`/${of}/${item.id}`);
+            };
+
+            return (
+              <SwiperItem key={item.id} whenClick={whenClick}>
+                <SlideshowItem
+                  discover={discover}
+                  item={item}
+                  onPopUpOpen={onPopUpOpen}
+                />
+              </SwiperItem>
+            );
+          })}
         </ul>
-      </div>
+      </Swiper>
     </div>
   );
 }

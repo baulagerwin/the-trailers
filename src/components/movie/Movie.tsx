@@ -18,6 +18,8 @@ import IMovie from "../../models/IMovie";
 import { getSearchMovies } from "../movies/services/getSearchMovies";
 import { moviesSelector } from "../../react-query/selectors";
 import SearchFilm from "../common/searchFilm/SearchFilm";
+import ICast from "../../models/ICast";
+import ICrew from "../../models/ICrew";
 
 function Movie() {
   const { movieId } = useParams();
@@ -69,7 +71,7 @@ function Movie() {
   )
     return <div>Loading...</div>;
 
-  console.log(movie.data);
+  console.log(casts.data);
 
   return (
     <>
@@ -86,7 +88,11 @@ function Movie() {
           children={null}
         />
         <div className="movie__body">
-          <FilmDetails film={movie.data as IMovieDetails} />
+          <FilmDetails
+            film={movie.data as IMovieDetails}
+            casts={casts.data?.cast as ICast[]}
+            crews={casts.data?.crew as ICrew[]}
+          />
         </div>
         <Footer />
       </div>

@@ -10,5 +10,5 @@ export default interface ICast {
   order: number;
   original_name: string;
   popularity: number;
-  poster_path: string;
+  profile_path: string;
 }

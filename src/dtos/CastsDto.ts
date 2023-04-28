@@ -3,6 +3,6 @@ import ICrew from "../models/ICrew";
 
 export default interface CastsDto {
   id: number;
-  casts: ICast[];
+  cast: ICast[];
   crew: ICrew[];
 }

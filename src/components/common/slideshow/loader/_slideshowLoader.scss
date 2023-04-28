@@ -14,23 +14,40 @@
   }
 
   @include respond(phone-large) {
-    padding: 2rem;
+    padding: 2rem 0rem 2rem 2rem;
   }
 
   &__header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 1rem 0rem;
     text-transform: uppercase;
+
+    @include respond(phone-large) {
+      padding-right: 2rem;
+    }
   }
 
   &__type {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     height: fit-content;
     gap: 0.6rem;
     height: 3rem;
     width: 16rem;
+    border-radius: 0.4rem;
+    background-color: $loading-color;
+
+    @include respond(tablet) {
+      font-size: 2rem;
+    }
+  }
+
+  &__see-more {
+    height: 2rem;
+    width: 8rem;
     border-radius: 0.4rem;
     background-color: $loading-color;
 

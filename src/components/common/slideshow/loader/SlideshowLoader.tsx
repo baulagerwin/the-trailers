@@ -3,6 +3,7 @@ function SlideshowLoader() {
     <div className="slideshow-loader u__animation--pulse">
       <div className="slideshow-loader__header">
         <div className="slideshow-loader__type"></div>
+        <div className="slideshow-loader__see-more"></div>
       </div>
       <div>
         <div className="slideshow-loader__window">

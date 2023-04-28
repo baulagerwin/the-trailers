@@ -6,7 +6,7 @@ function Index() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate("/movies");
+    navigate("/tv-shows");
   }, []);
 
   return <MoviesLoader />;

@@ -27,18 +27,18 @@ function Navbar() {
         } ${status === "close" && "u__animation--sidebar-close"}`}
         onClick={(e) => e.stopPropagation()}
       >
-        <Link to="/movies" className={`navbar__link`} onClick={handleOnClose}>
-          <span
-            className={`${pathname.match(/\/movies$/) && "u__active--page"}`}
-          >
-            Movies
-          </span>
-        </Link>
         <Link to="/tv-shows" className={`navbar__link`} onClick={handleOnClose}>
           <span
             className={` ${pathname.match(/\/tv-shows$/) && "u__active--page"}`}
           >
             TV Shows
+          </span>
+        </Link>
+        <Link to="/movies" className={`navbar__link`} onClick={handleOnClose}>
+          <span
+            className={`${pathname.match(/\/movies$/) && "u__active--page"}`}
+          >
+            Movies
           </span>
         </Link>
       </div>
