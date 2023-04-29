@@ -124,17 +124,19 @@ function Movie() {
           backgroundImageUrl={movie.data?.backdrop_path as string}
           children={null}
         />
-        <div className="movie__body">
-          <FilmDetails
-            film={movie.data as IMovieDetails}
-            discover="movie"
-            casts={casts.data?.cast as ICast[]}
-            crews={casts.data?.crew as ICrew[]}
-            onPopUpOpen={popup.openPopUp}
-            trailerKey={trailerKey || ""}
-          />
-        </div>
-        <Footer />
+        {!!!searched.isSearching && (
+          <div className="movie__body">
+            <FilmDetails
+              film={movie.data as IMovieDetails}
+              discover="movie"
+              casts={casts.data?.cast as ICast[]}
+              crews={casts.data?.crew as ICrew[]}
+              onPopUpOpen={popup.openPopUp}
+              trailerKey={trailerKey || ""}
+            />
+          </div>
+        )}
+        {!!!searched.isSearching && <Footer />}
       </div>
     </>
   );

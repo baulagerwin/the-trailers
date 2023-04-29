@@ -126,17 +126,19 @@ function TvShow() {
           backgroundImageUrl={tvShow.data?.backdrop_path as string}
           children={null}
         />
-        <div className="tv-show__body">
-          <FilmDetails
-            film={tvShow.data as ITvShowDetails}
-            discover="tv"
-            casts={casts.data?.cast as ICast[]}
-            crews={casts.data?.crew as ICrew[]}
-            onPopUpOpen={popup.openPopUp}
-            trailerKey={trailerKey || ""}
-          />
-        </div>
-        <Footer />
+        {!!!searched.isSearching && (
+          <div className="tv-show__body">
+            <FilmDetails
+              film={tvShow.data as ITvShowDetails}
+              discover="tv"
+              casts={casts.data?.cast as ICast[]}
+              crews={casts.data?.crew as ICrew[]}
+              onPopUpOpen={popup.openPopUp}
+              trailerKey={trailerKey || ""}
+            />
+          </div>
+        )}
+        {!!!searched.isSearching && <Footer />}
       </div>
     </>
   );
