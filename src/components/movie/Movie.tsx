@@ -20,6 +20,11 @@ import { moviesSelector } from "../../react-query/selectors";
 import SearchFilm from "../common/searchFilm/SearchFilm";
 import ICast from "../../models/ICast";
 import ICrew from "../../models/ICrew";
+import useQueryPopUpFilms from "../../hooks/useQueryPopUpFilms";
+import PopUpFilms from "../common/popupFilms/PopUpFilms";
+import { useCallback } from "react";
+import IGenre from "../../models/IGenre";
+import MovieLoader from "./loader/MovieLoader";
 
 function Movie() {
   const { movieId } = useParams();
@@ -32,16 +37,32 @@ function Movie() {
     moviesSelector
   );
 
+  const popup = useQueryPopUpFilms<MovieDto, IMovie>(
+    keys.popupMovies,
+    moviesSelector,
+    genres
+  );
+
+  const genresSelector = useCallback(
+    (genre: IGenre) => ({
+      ...genre,
+      borderColor: getRandomColor(),
+    }),
+    []
+  );
+
+  const transformMovie = useCallback(
+    (movie: IMovieDetails) => ({
+      ...movie,
+      genres: movie.genres.map(genresSelector),
+    }),
+    []
+  );
+
   const movie = useQuery({
     queryKey: [keys.movie, movieId],
     queryFn: () => getMovie(movieId as string),
-    select: (movie) => ({
-      ...movie,
-      genres: movie.genres.map((genre) => ({
-        ...genre,
-        borderColor: getRandomColor(),
-      })),
-    }),
+    select: transformMovie,
     cacheTime: 0,
   });
 
@@ -69,12 +90,21 @@ function Movie() {
     posters.isInitialLoading ||
     videos.isInitialLoading
   )
-    return <div>Loading...</div>;
-
-  console.log(casts.data);
+    return <MovieLoader />;
 
   return (
     <>
+      {!!popup.status && (
+        <PopUpFilms
+          category={popup.category}
+          infiniteFilms={popup.infiniteFilms}
+          isInitialLoading={popup.isInitialLoading}
+          isFetching={popup.isFetching}
+          fetchNextPage={popup.fetchNextPage}
+          status={popup.status}
+          onClose={popup.closePopUp}
+        />
+      )}
       {searched.isSearching && (
         <SearchFilm isFetching={searched.isFetching} results={searched.data} />
       )}
@@ -90,8 +120,10 @@ function Movie() {
         <div className="movie__body">
           <FilmDetails
             film={movie.data as IMovieDetails}
+            discover="movie"
             casts={casts.data?.cast as ICast[]}
             crews={casts.data?.crew as ICrew[]}
+            onPopUpOpen={popup.openPopUp}
           />
         </div>
         <Footer />

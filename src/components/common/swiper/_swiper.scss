@@ -1,3 +1,13 @@
 .swiper {
   overflow-x: hidden;
+
+  &__items {
+    list-style: none;
+    display: flex;
+    width: fit-content;
+
+    @include respond(phone-large) {
+      margin-right: 2rem;
+    }
+  }
 }

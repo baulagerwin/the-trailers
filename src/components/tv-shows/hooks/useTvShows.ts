@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import TvShowDto from "../../../dtos/TvShowDto";
 import useHeaderFilm from "../../../hooks/useHeaderFilm";
 import useQueryFilms from "../../../hooks/useQueryFilms";
@@ -60,7 +61,7 @@ function useTvShows() {
 
   const header = useHeaderFilm<ITvShow>(trending.data);
 
-  const slideshowItemsSelector = (tvShows: ITvShow[]) => {
+  const slideshowItemsSelector = useCallback((tvShows: ITvShow[]) => {
     return tvShows.map((tvShow) => ({
       id: tvShow.id,
       imageUrl: tvShow.poster_path,
@@ -68,7 +69,7 @@ function useTvShows() {
       releaseDate: tvShow.first_air_date,
       genres: tvShow.genres,
     }));
-  };
+  }, []);
 
   return {
     searched,

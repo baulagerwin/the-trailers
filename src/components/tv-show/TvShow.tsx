@@ -20,6 +20,12 @@ import { tvShowsSelector } from "../../react-query/selectors";
 import SearchFilm from "../common/searchFilm/SearchFilm";
 import ICast from "../../models/ICast";
 import ICrew from "../../models/ICrew";
+import useQueryPopUpFilms from "../../hooks/useQueryPopUpFilms";
+import PopUpFilms from "../common/popupFilms/PopUpFilms";
+import { useCallback } from "react";
+import IGenre from "../../models/IGenre";
+import FilmDetailsLoader from "../common/filmDetails/loader/FilmDetailsLoader";
+import TvShowLoader from "./loader/TvShowLoader";
 
 function TvShow() {
   const { tvShowId } = useParams();
@@ -33,16 +39,32 @@ function TvShow() {
     tvShowsSelector
   );
 
+  const popup = useQueryPopUpFilms<TvShowDto, ITvShow>(
+    keys.popupTvShows,
+    tvShowsSelector,
+    genres
+  );
+
+  const genresSelector = useCallback(
+    (genre: IGenre) => ({
+      ...genre,
+      borderColor: getRandomColor(),
+    }),
+    []
+  );
+
+  const transformTvShow = useCallback(
+    (tvShow: ITvShowDetails) => ({
+      ...tvShow,
+      genres: tvShow.genres.map(genresSelector),
+    }),
+    []
+  );
+
   const tvShow = useQuery({
     queryKey: [keys.tvShow, tvShowId],
     queryFn: () => getTvShow(tvShowId as string),
-    select: (tvShow) => ({
-      ...tvShow,
-      genres: tvShow.genres.map((genre) => ({
-        ...genre,
-        borderColor: getRandomColor(),
-      })),
-    }),
+    select: transformTvShow,
     cacheTime: 0,
   });
 
@@ -70,12 +92,21 @@ function TvShow() {
     posters.isInitialLoading ||
     videos.isInitialLoading
   )
-    return <div>Loading...</div>;
-
-  console.log(casts.data);
+    return <TvShowLoader />;
 
   return (
     <>
+      {!!popup.status && (
+        <PopUpFilms
+          category={popup.category}
+          infiniteFilms={popup.infiniteFilms}
+          isInitialLoading={popup.isInitialLoading}
+          isFetching={popup.isFetching}
+          fetchNextPage={popup.fetchNextPage}
+          status={popup.status}
+          onClose={popup.closePopUp}
+        />
+      )}
       {searched.isSearching && (
         <SearchFilm isFetching={searched.isFetching} results={searched.data} />
       )}
@@ -91,8 +122,10 @@ function TvShow() {
         <div className="tv-show__body">
           <FilmDetails
             film={tvShow.data as ITvShowDetails}
+            discover="tv"
             casts={casts.data?.cast as ICast[]}
             crews={casts.data?.crew as ICrew[]}
+            onPopUpOpen={popup.openPopUp}
           />
         </div>
         <Footer />

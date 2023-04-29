@@ -2,9 +2,10 @@ import useSwiper from "./hooks/useSwiper";
 
 interface Props {
   children: React.ReactNode;
+  gap: string;
 }
 
-function Swiper({ children }: Props) {
+function Swiper({ children, gap }: Props) {
   const swiper = useSwiper();
 
   return (
@@ -19,7 +20,9 @@ function Swiper({ children }: Props) {
       onTouchMove={swiper.handleOnTouchMove}
       onTouchEnd={swiper.handleOnTouchEnd}
     >
-      {children}
+      <ul className="swiper__items" style={{ gap: `${gap}` }}>
+        {children}
+      </ul>
     </div>
   );
 }

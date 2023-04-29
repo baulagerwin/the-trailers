@@ -1,0 +1,10 @@
+.genre-button-loader {
+  height: 2.6rem;
+  width: 6rem;
+  background-color: $loading-color;
+  padding: 0.4rem 0.4rem;
+  border-radius: 0.4rem;
+  // border: 1px solid $text-color;
+  display: inline-block;
+  cursor: pointer;
+}

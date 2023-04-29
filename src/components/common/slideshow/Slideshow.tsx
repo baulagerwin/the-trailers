@@ -42,24 +42,22 @@ function Slideshow({
           </button>
         </div>
       </div>
-      <Swiper>
-        <ul className="slideshow__items">
-          {items?.map((item) => {
-            const whenClick = () => {
-              navigate(`/${of}/${item.id}`);
-            };
+      <Swiper gap={"2.2rem"}>
+        {items?.map((item) => {
+          const whenClick = () => {
+            navigate(`/${of}/${item.id}`);
+          };
 
-            return (
-              <SwiperItem key={item.id} whenClick={whenClick}>
-                <SlideshowItem
-                  discover={discover}
-                  item={item}
-                  onPopUpOpen={onPopUpOpen}
-                />
-              </SwiperItem>
-            );
-          })}
-        </ul>
+          return (
+            <SwiperItem key={item.id} whenClick={whenClick}>
+              <SlideshowItem
+                discover={discover}
+                item={item}
+                onPopUpOpen={onPopUpOpen}
+              />
+            </SwiperItem>
+          );
+        })}
       </Swiper>
     </div>
   );

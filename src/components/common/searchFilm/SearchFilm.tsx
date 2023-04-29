@@ -25,13 +25,15 @@ function SearchFilm<T extends IFilm>({ isFetching, results }: Props<T>) {
         {isFetching ? (
           <SearchFilmLoader />
         ) : (
-          <ul className="search-film__results">
-            {results
-              .filter((r) => r.poster_path)
-              .map((film) => (
-                <li key={film.id}>{film && <Poster item={film} />}</li>
-              ))}
-          </ul>
+          <>
+            <ul className="search-film__results">
+              {results
+                .filter((r) => r.poster_path)
+                .map((film) => (
+                  <li key={film.id}>{film && <Poster item={film} />}</li>
+                ))}
+            </ul>
+          </>
         )}
       </div>
       <Footer />

@@ -39,7 +39,7 @@ function HeaderFilm({ of, discover, item, onPopUpOpen }: Props) {
               </span>
             </div>
           )}
-          {!!item?.title && (
+          {!!item?.title && !!item?.id && (
             <Link to={`/${of}/${item.id}`}>
               <h1>{item?.title}</h1>
             </Link>
