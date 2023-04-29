@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import keys from "../../react-query/keys";
 import getTvShow from "./services/getTvShow";
 import { useQuery } from "@tanstack/react-query";
@@ -27,6 +27,7 @@ import IGenre from "../../models/IGenre";
 import TvShowLoader from "./loader/TvShowLoader";
 
 function TvShow() {
+  const navigate = useNavigate();
   const { tvShowId } = useParams();
 
   const genres = useQueryGenres(keys.tvShowGenres, getTvShowGenres);
@@ -93,6 +94,12 @@ function TvShow() {
   )
     return <TvShowLoader />;
 
+  if (tvShow.error) navigate("/404");
+
+  const trailerKey = videos.data?.results.find(
+    (r) => r.type === "Trailer"
+  )?.key;
+
   return (
     <>
       {!!popup.status && (
@@ -126,7 +133,7 @@ function TvShow() {
             casts={casts.data?.cast as ICast[]}
             crews={casts.data?.crew as ICrew[]}
             onPopUpOpen={popup.openPopUp}
-            trailerKey={videos.data?.results[0].key as string}
+            trailerKey={trailerKey || ""}
           />
         </div>
         <Footer />

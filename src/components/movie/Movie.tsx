@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import keys from "../../react-query/keys";
 import getMovie from "./services/getMovie";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import getMovieCasts from "./services/getMovieCasts";
 import getMoviePosters from "./services/getMoviePosters";
 import getMovieVideos from "./services/getMovieVideos";
@@ -27,6 +27,7 @@ import IGenre from "../../models/IGenre";
 import MovieLoader from "./loader/MovieLoader";
 
 function Movie() {
+  const navigate = useNavigate();
   const { movieId } = useParams();
   const genres = useQueryGenres(keys.movieGenres, getMovieGenres);
 
@@ -92,6 +93,12 @@ function Movie() {
   )
     return <MovieLoader />;
 
+  if (movie.error) navigate("/404");
+
+  const trailerKey = videos.data?.results.find(
+    (r) => r.type === "Trailer"
+  )?.key;
+
   return (
     <>
       {!!popup.status && (
@@ -124,7 +131,7 @@ function Movie() {
             casts={casts.data?.cast as ICast[]}
             crews={casts.data?.crew as ICrew[]}
             onPopUpOpen={popup.openPopUp}
-            trailerKey={videos.data?.results[0].key as string}
+            trailerKey={trailerKey || ""}
           />
         </div>
         <Footer />

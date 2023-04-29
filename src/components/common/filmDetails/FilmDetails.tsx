@@ -93,9 +93,15 @@ function FilmDetails<T extends IFilm>({
       <Swiper gap="1rem">
         <SwiperItem whenClick={() => {}}>
           <a
-            href={`https://youtube.com/watch?v=${trailerKey}`}
-            // target="_blank"
-            className="film-details__main-details-item film-details__trailer-button"
+            href={`https://youtube.com/watch?v=${trailerKey || "dQw4w9WgXcQ"}`}
+            target="_blank"
+            className="film-details__main-details-item film-details__trailer-button u__trailer-button--desktop"
+          >
+            <BsFillPlayFill className="film-details__trailer-icon" />
+          </a>
+          <a
+            href={`https://youtube.com/watch?v=${trailerKey || "dQw4w9WgXcQ"}`}
+            className="film-details__main-details-item film-details__trailer-button u__trailer-button--mobile"
           >
             <BsFillPlayFill className="film-details__trailer-icon" />
           </a>

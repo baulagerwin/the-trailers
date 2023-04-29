@@ -52,3 +52,17 @@
   background-color: transparent;
   border-radius: 0.4rem;
 }
+
+.u__trailer-button--desktop {
+  @include respond(tablet) {
+    display: none !important;
+  }
+}
+
+.u__trailer-button--mobile {
+  display: none !important;
+
+  @include respond(tablet) {
+    display: flex !important;
+  }
+}
