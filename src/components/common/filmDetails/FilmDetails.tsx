@@ -40,6 +40,7 @@ interface Props<T extends IFilm> {
   casts: ICast[];
   crews: ICrew[];
   onPopUpOpen: (e: React.MouseEvent, data: IPopUpCategory) => void;
+  trailerKey: string;
 }
 
 function FilmDetails<T extends IFilm>({
@@ -48,6 +49,7 @@ function FilmDetails<T extends IFilm>({
   casts,
   crews,
   onPopUpOpen,
+  trailerKey,
 }: Props<T>) {
   const isEmptyImage = crews.every((crew) => !Boolean(crew.profile_path));
 
@@ -90,9 +92,13 @@ function FilmDetails<T extends IFilm>({
       </div>
       <Swiper gap="1rem">
         <SwiperItem whenClick={() => {}}>
-          <div className="film-details__main-details-item film-details__trailer-button">
+          <a
+            href={`https://youtube.com/watch?v=${trailerKey}`}
+            // target="_blank"
+            className="film-details__main-details-item film-details__trailer-button"
+          >
             <BsFillPlayFill className="film-details__trailer-icon" />
-          </div>
+          </a>
         </SwiperItem>
         <SwiperItem whenClick={() => {}}>
           <div className="film-details__main-details-item">

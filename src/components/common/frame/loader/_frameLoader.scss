@@ -1,0 +1,30 @@
+.frame-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+  user-select: none;
+  width: 12rem;
+
+  &__image {
+    height: 18rem;
+    background-color: $loading-color;
+    width: inherit;
+    border-radius: 1.6rem;
+  }
+
+  span {
+    height: 2rem;
+    border-radius: 0.4rem;
+    width: 10rem;
+    background-color: $loading-color;
+  }
+
+  &__job {
+    height: 2rem !important;
+    border-radius: 0.4rem !important;
+    width: 10rem !important;
+    background-color: $loading-color !important;
+  }
+}

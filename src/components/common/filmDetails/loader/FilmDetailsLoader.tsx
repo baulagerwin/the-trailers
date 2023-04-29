@@ -1,3 +1,4 @@
+import FrameLoader from "../../frame/loader/FrameLoader";
 import GenreButtonLoader from "../../genreButton/loader/GenreButtonLoader";
 
 function FilmDetailsLoader() {
@@ -38,8 +39,68 @@ function FilmDetailsLoader() {
           <div className="film-details-loader__production-body"></div>
           <div className="film-details-loader__production-body"></div>
         </div>
-        <div className="film-details-loader__casts"></div>
-        <div className="film-details-loader__crew"></div>
+        <div className="film-details-loader__casts">
+          <div className="film-details-loader__casts-header"></div>
+          <div className="film-details-loader__casts-body">
+            <ul className="film-details-loader__casts-items">
+              <li className="film-details-loader__casts-item">
+                <FrameLoader />
+              </li>
+              <li className="film-details-loader__casts-item">
+                <FrameLoader />
+              </li>
+              <li className="film-details-loader__casts-item">
+                <FrameLoader />
+              </li>
+              <li className="film-details-loader__casts-item">
+                <FrameLoader />
+              </li>
+              <li className="film-details-loader__casts-item">
+                <FrameLoader />
+              </li>
+              <li className="film-details-loader__casts-item">
+                <FrameLoader />
+              </li>
+              <li className="film-details-loader__casts-item">
+                <FrameLoader />
+              </li>
+              <li className="film-details-loader__casts-item">
+                <FrameLoader />
+              </li>
+              <li className="film-details-loader__casts-item">
+                <FrameLoader />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="film-details-loader__crews">
+          <div className="film-details-loader__crews-header"></div>
+          <div className="film-details-loader__crews-body">
+            <ul className="film-details-loader__crews-items">
+              <li className="film-details-loader__crews-item">
+                <FrameLoader />
+              </li>
+              <li className="film-details-loader__crews-item">
+                <FrameLoader />
+              </li>
+              <li className="film-details-loader__crews-item">
+                <FrameLoader />
+              </li>
+              <li className="film-details-loader__crews-item">
+                <FrameLoader />
+              </li>
+              <li className="film-details-loader__crews-item">
+                <FrameLoader />
+              </li>
+              <li className="film-details-loader__crews-item">
+                <FrameLoader />
+              </li>
+              <li className="film-details-loader__crews-item">
+                <FrameLoader />
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   );

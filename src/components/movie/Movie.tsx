@@ -124,6 +124,7 @@ function Movie() {
             casts={casts.data?.cast as ICast[]}
             crews={casts.data?.crew as ICrew[]}
             onPopUpOpen={popup.openPopUp}
+            trailerKey={videos.data?.results[0].key as string}
           />
         </div>
         <Footer />

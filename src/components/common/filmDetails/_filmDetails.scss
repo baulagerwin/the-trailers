@@ -112,10 +112,13 @@
   &__trailer-button {
     font-size: 6rem;
     background-color: rgba($color: #fff, $alpha: 0.8);
+    background-color: rgba($color: #ff0000, $alpha: 0.8);
+    cursor: pointer;
   }
 
   &__trailer-icon {
     color: rgba($color: $background-color, $alpha: 0.6);
+    color: rgba($color: #fff, $alpha: 1);
   }
 
   &__2x1 {

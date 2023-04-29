@@ -85,7 +85,10 @@ function PopUpFilms<T extends IFilm>({
                     {films.results
                       .filter((r) => r.poster_path)
                       .map((film) => (
-                        <div key={film.id} onClick={() => onReset && onReset()}>
+                        <div
+                          key={film.id}
+                          onClick={() => !!onReset && onReset()}
+                        >
                           <Poster item={film} />
                         </div>
                       ))}
