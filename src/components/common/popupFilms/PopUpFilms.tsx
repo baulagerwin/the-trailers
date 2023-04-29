@@ -29,6 +29,7 @@ interface Props<T extends IFilm> {
   fetchNextPage: () => void;
   status: string;
   onClose: () => void;
+  onReset?: () => void;
 }
 
 function PopUpFilms<T extends IFilm>({
@@ -39,6 +40,7 @@ function PopUpFilms<T extends IFilm>({
   isFetching,
   fetchNextPage,
   onClose,
+  onReset,
 }: Props<T>) {
   useDisableMainScrollbar(status);
 
@@ -83,7 +85,9 @@ function PopUpFilms<T extends IFilm>({
                     {films.results
                       .filter((r) => r.poster_path)
                       .map((film) => (
-                        <Poster key={film.id} item={film} />
+                        <div key={film.id} onClick={() => onReset && onReset()}>
+                          <Poster item={film} />
+                        </div>
                       ))}
                   </li>
                 </ul>

@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 function useOverlayTransition() {
   const [status, setStatus] = useState("");
 
+  function handleReset() {
+    setStatus("");
+  }
+
   function handleOnClose() {
     if (status === "open") {
       setStatus("close");
@@ -23,7 +27,7 @@ function useOverlayTransition() {
     return () => document.removeEventListener("click", handleOnClose);
   }, [status]);
 
-  return { status, handleOnOpen, handleOnClose };
+  return { status, handleOnOpen, handleOnClose, handleReset };
 }
 
 export default useOverlayTransition;

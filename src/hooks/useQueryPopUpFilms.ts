@@ -45,7 +45,8 @@ export default function usePopUpFilms<T, K>(
   selector: (data: ResultsDto<T>, genres: IGenre[]) => K[],
   genres: IGenre[]
 ) {
-  const { status, handleOnOpen, handleOnClose } = useOverlayTransition();
+  const { status, handleOnOpen, handleOnClose, handleReset } =
+    useOverlayTransition();
   const [category, setCategory] = useState<IPopUpCategory>({
     name: "",
     url: "",
@@ -53,6 +54,14 @@ export default function usePopUpFilms<T, K>(
 
   const { infiniteFilms, isInitialLoading, isFetching, fetchNextPage } =
     useQueryPopUpFilms<T>(key, category);
+
+  function resetPopUp() {
+    setCategory({
+      name: "",
+      url: "",
+    });
+    handleReset();
+  }
 
   function openPopUp(e: React.MouseEvent, data: IPopUpCategory) {
     setCategory(data);
@@ -79,5 +88,6 @@ export default function usePopUpFilms<T, K>(
     status,
     openPopUp,
     closePopUp,
+    resetPopUp,
   };
 }

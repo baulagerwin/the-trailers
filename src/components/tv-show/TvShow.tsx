@@ -24,7 +24,6 @@ import useQueryPopUpFilms from "../../hooks/useQueryPopUpFilms";
 import PopUpFilms from "../common/popupFilms/PopUpFilms";
 import { useCallback } from "react";
 import IGenre from "../../models/IGenre";
-import FilmDetailsLoader from "../common/filmDetails/loader/FilmDetailsLoader";
 import TvShowLoader from "./loader/TvShowLoader";
 
 function TvShow() {
@@ -105,6 +104,7 @@ function TvShow() {
           fetchNextPage={popup.fetchNextPage}
           status={popup.status}
           onClose={popup.closePopUp}
+          onReset={popup.resetPopUp}
         />
       )}
       {searched.isSearching && (
