@@ -32,7 +32,7 @@ Follow these instructions to run this project on your local machine for developm
   npm run dev
 ```
 
-4. Open your default browser and copy paste the link below.
+4. In your default browser, copy the text below and paste it in address bar.
 
 ```bash
   http://localhost:5173/
