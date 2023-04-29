@@ -47,7 +47,7 @@ function HeaderFilm({ of, discover, item, onPopUpOpen }: Props) {
           {!!item?.genres.length && (
             <div className="header-film__genres">
               {item?.genres.map((genre) => (
-                <GenreButton key={genre.id} genre={genre}>
+                <GenreButton key={genre.name} genre={genre}>
                   <div
                     className="u__overlay--cover"
                     onClick={(e) =>

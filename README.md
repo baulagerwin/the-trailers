@@ -37,7 +37,7 @@ Follow these instructions to run this project on your local machine for developm
 ## Built With
 
 - React
-- TypesScript
+- TypeScript
 - React Query v4
 - Syntactically Awesome Stylesheet (SASS)
 
