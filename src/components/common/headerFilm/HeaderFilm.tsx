@@ -23,6 +23,8 @@ interface Props {
 }
 
 function HeaderFilm({ of, discover, item, onPopUpOpen }: Props) {
+  const isGenresDefined = item.genres.every((genre) => !!genre);
+
   return (
     <BackgroundFilm backgroundImageUrl={item.backgroundImageUrl}>
       <div className="header-film__details">
@@ -44,7 +46,7 @@ function HeaderFilm({ of, discover, item, onPopUpOpen }: Props) {
               <h1>{item?.title}</h1>
             </Link>
           )}
-          {!!item?.genres.length && (
+          {isGenresDefined && (
             <div className="header-film__genres">
               {item?.genres.map((genre) => (
                 <GenreButton key={genre.name} genre={genre}>

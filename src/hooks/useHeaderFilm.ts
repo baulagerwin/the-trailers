@@ -56,6 +56,8 @@ function useHeaderFilm<T extends IFilm>(films: T[]) {
     }
   }, [films]);
 
+  console.log(headerFilm);
+
   return headerFilm;
 }
 
