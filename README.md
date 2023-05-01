@@ -2,6 +2,8 @@
 
 Explore trending movies & TV shows with our The Movie DB API-powered website. Stay updated with the latest hits!
 
+## Preview
+
 ![The Trailers](the-trailers.PNG)
 
 ## Requirements
